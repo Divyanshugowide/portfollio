@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Divyanshu Purohit — Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <main class="stage">
+        <header class="nav" role="banner">
+            <div class="brand">Divyanshu Purohit</div>
+            <div class="nav-actions">
+                <a class="btn resume-btn" href="DivyanshuResume.pdf" download>Download Resume (PDF)</a>
+                <button class="menu-toggle" aria-label="Toggle navigation">☰</button>
+            </div>
+            <nav class="links" role="navigation">
+                <a href="#about">About</a>
+                <a href="#experience">Experience</a>
+                <a href="#projects">Projects</a>
+                <a href="#skills">Skills</a>
+                <a href="#contact">Contact</a>
+            </nav>
+        </header>
+
+        <section class="hero" aria-label="Hero">
+            <div id="scene">
+                <div class="card" id="card">
+                    <div class="card__bg"></div>
+                    <div class="card__content">
+                        <div class="profile">
+                            <img src="assets/WhatsApp Image 2025-11-30 at 4.49.31 PM.jpeg" alt="Profile" id="profileImg" loading="lazy" style="object-fit:cover;width:100%;height:100%;border-radius:50%;border:4px solid #fff;box-shadow:0 4px 24px rgba(0,0,0,0.18);background:#222;">
+                        </div>
+                        <div class="hero-info">
+                            <h1 class="name">Divyanshu Purohit</h1>
+                            <p class="role"><span id="typed-sub">AI Engineer — LLMs · RAG · Deployments</span></p>
+                            <p class="lede">I design scalable AI systems, production-ready LLM workflows and retrieval architectures.</p>
+                            <div class="contact-inline">
+                                <span class="phone">📞 7037730830</span>
+                                <a class="mail" href="mailto:divyanshu.25bkbiet@gmail.com">✉ divyanshu.25bkbiet@gmail.com</a>
+                            </div>
+                            <div class="cta-row">
+                                <a class="btn" href="#projects">See Projects</a>
+                                <a class="ghost" href="#contact">Contact Me</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card__floats">
+                        <div class="orb orb--one"></div>
+                        <div class="orb orb--two"></div>
+                        <div class="orb orb--three"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-deco">
+                <div class="grid3d"></div>
+            </div>
+        </section>
+
+        <section id="about" class="panel">
+            <h2>About</h2>
+            <div class="about-grid">
+                <div>
+                    <p>
+                        AI Engineer with hands-on experience in LLM applications, multimodal AI, microservices, Docker-based deployments, and building production-ready pipelines. Strong foundation in Python, ML/DL, embeddings, and end-to-end system design.
+                    </p>
+                </div>
+                <div class="about-stats">
+                    <div><strong>BTech</strong> — Computer Science (2021–2025)</div>
+                    <div><strong>Location</strong> — Dehradun, Uttarakhand</div>
+                    <div><strong>Email</strong> — divyanshu.25bkbiet@gmail.com</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience" class="panel">
+            <h2>Experience</h2>
+            <div class="cards">
+                <div class="exp">
+                    <h3>AI Intern — GoWide Technologies Pvt. Ltd <span class="exp-dates">Oct 2025 – Present</span></h3>
+                    <p>Worked on multiple LLM-driven client projects, designing AI pipelines, embeddings workflows, and structured reasoning systems. Built microservices using FastAPI & Docker for indexing, search, inference.</p>
+                </div>
+                <div class="exp">
+                    <h3>AI Intern — Anantagani Industries <span class="exp-dates">Apr 2025 – Jul 2025</span></h3>
+                    <p>Led large-scale data labeling, developed CNN classifier, and integrated camera-based real-time detection using OpenCV.</p>
+                </div>
+                <div class="exp">
+                    <h3>Data Analyst Intern — Tranity <span class="exp-dates">Apr 2024 – Aug 2024</span></h3>
+                    <p>Performed real-time analysis, cleaned large datasets, and developed Power BI dashboards for KPI tracking.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="panel">
+            <h2>Projects</h2>
+            <div class="projects-grid">
+                <article class="project-card" data-project="nrrc">
+                    <a href="https://youtu.be/rlcIA71q2lc" target="_blank" class="pc-media">
+                        <img src="https://img.youtube.com/vi/rlcIA71q2lc/hqdefault.jpg" alt="NRRC AI Demo Thumbnail" style="width:100%;height:120px;object-fit:cover;border-radius:12px 12px 0 0;">
+                    </a>
+                    <div class="pc-body">
+                        <h3>NRRC AI — GoWide</h3>
+                        <p>Multi-stage reasoning engine for document parsing, embeddings, and retrieval with production microservices.</p>
+                        <p class="tags"><span>RAG</span><span>Embeddings</span><span>FastAPI</span></p>
+                        <a class="btn" href="https://youtu.be/rlcIA71q2lc" target="_blank">YouTube Demo</a>
+                        <button class="ghost open-project">Details</button>
+                    </div>
+                </article>
+                <article class="project-card" data-project="crystal">
+                    <a href="https://youtu.be/iblLlpRmmQQ" target="_blank" class="pc-media">
+                        <img src="https://img.youtube.com/vi/iblLlpRmmQQ/hqdefault.jpg" alt="Crystal AI Demo Thumbnail" style="width:100%;height:120px;object-fit:cover;border-radius:12px 12px 0 0;">
+                    </a>
+                    <div class="pc-body">
+                        <h3>Crystal AI — Personal AI Assistant</h3>
+                        <p>Personal AI with long-term memory, contextual reasoning, and modular skills. FastAPI backend, RAG search, Dockerized for easy deployment.</p>
+                        <p class="tags"><span>LLM</span><span>RAG</span><span>FastAPI</span><span>Docker</span></p>
+                        <a class="btn" href="https://youtu.be/iblLlpRmmQQ" target="_blank">YouTube Demo</a>
+                        <button class="ghost open-project">Details</button>
+                    </div>
+                </article>
+                <!-- Prototype AI Chatbot project removed as requested -->
+                <article class="project-card" data-project="face">
+                    <a href="https://github.com/Divyanshupurohit1/facedetectionsystem.git" target="_blank" class="pc-media">
+                        <img src="assets/images.jpg" alt="Face Emotion Detection Poster" style="width:100%;height:120px;object-fit:cover;border-radius:12px 12px 0 0;">
+                    </a>
+                    <div class="pc-body">
+                        <h3>Face Emotion Detection</h3>
+                        <p>Real-time CNN + OpenCV pipeline for seven emotion classes with dataset labeling and model training workflows.</p>
+                        <p class="tags"><span>OpenCV</span><span>TensorFlow</span></p>
+                        <a class="btn" href="https://github.com/Divyanshupurohit1/facedetectionsystem.git" target="_blank">GitHub Repo</a>
+                        <button class="ghost open-project">Details</button>
+                    </div>
+                </article>
+                <article class="project-card" data-project="finder">
+                    <a href="https://youtu.be/8FG_ztCdxk4" target="_blank" class="pc-media">
+                        <img src="https://img.youtube.com/vi/8FG_ztCdxk4/hqdefault.jpg" alt="Article Finder AI Demo Thumbnail" style="width:100%;height:120px;object-fit:cover;border-radius:12px 12px 0 0;">
+                    </a>
+                    <div class="pc-body">
+                        <h3>Offline Article Finder</h3>
+                        <p>FAISS + BM25 hybrid retrieval system using SentenceTransformer embeddings with local FastAPI inference backend.</p>
+                        <p class="tags"><span>FAISS</span><span>BM25</span></p>
+                        <a class="btn" href="https://youtu.be/8FG_ztCdxk4" target="_blank">YouTube Demo</a>
+                        <button class="ghost open-project">Details</button>
+                    </div>
+                </article>
+                <article class="project-card" data-project="productsearch">
+                    <a href="https://youtu.be/JgVi5H4PoPY" target="_blank" class="pc-media">
+                        <img src="https://img.youtube.com/vi/JgVi5H4PoPY/hqdefault.jpg" alt="Product Search AI Demo Thumbnail" style="width:100%;height:120px;object-fit:cover;border-radius:12px 12px 0 0;">
+                    </a>
+                    <div class="pc-body">
+                        <h3>Product Search AI</h3>
+                        <p>Video demo of product search AI system.</p>
+                        <p class="tags"><span>Search</span><span>AI</span></p>
+                        <a class="btn" href="https://youtu.be/JgVi5H4PoPY" target="_blank">YouTube Demo</a>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Project detail modal -->
+        <div id="projectModal" class="modal hide" role="dialog" aria-hidden="true">
+            <div class="modal-backdrop"></div>
+            <div class="modal-panel" role="document">
+                <button class="modal-close" aria-label="Close">✕</button>
+                <div class="modal-content">
+                    <h3 id="modalTitle">Project</h3>
+                    <p id="modalBody">Details...</p>
+                    <p class="tags" id="modalTags"></p>
+                </div>
+            </div>
+        </div>
+
+        <section id="skills" class="panel">
+            <h2>Skills</h2>
+            <div class="skill-grid">
+                <div class="skill"><label>Python</label>
+                    <div class="bar"><span style="--pct:95%"></span></div>
+                </div>
+                <div class="skill"><label>LLMs & RAG</label>
+                    <div class="bar"><span style="--pct:90%"></span></div>
+                </div>
+                <div class="skill"><label>FastAPI / Microservices</label>
+                    <div class="bar"><span style="--pct:88%"></span></div>
+                </div>
+                <div class="skill"><label>Docker & Dockerization</label>
+                    <div class="bar"><span style="--pct:92%"></span></div>
+                </div>
+                <div class="skill"><label>Deployment (Render, Vercel, DockerHub, DigitalOcean Droplet)</label>
+                    <div class="bar"><span style="--pct:88%"></span></div>
+                </div>
+                <div class="skill"><label>Ngrok / Tunneling</label>
+                    <div class="bar"><span style="--pct:80%"></span></div>
+                </div>
+                <div class="skill"><label>FAISS / Retrieval</label>
+                    <div class="bar"><span style="--pct:80%"></span></div>
+                </div>
+            </div>
+            <h3 style="margin-top:32px;">Soft Skills</h3>
+            <ul class="soft-skills-list" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin:18px 0 0 0;padding:0;list-style:none;">
+                <li>Communication</li>
+                <li>Teamwork</li>
+                <li>Leadership</li>
+                <li>Problem Solving</li>
+                <li>Adaptability</li>
+                <li>Critical Thinking</li>
+                <li>Project Management</li>
+                <li>Time Management</li>
+            </ul>
+        </section>
+
+        <section id="contact" class="panel contact-panel">
+            <h2>Contact</h2>
+            <div class="contact-grid">
+                <div>
+                    <p><strong>Phone:</strong> 7037730830</p>
+                    <p><strong>Email:</strong> <a href="mailto:divyanshu.25bkbiet@gmail.com">divyanshu.25bkbiet@gmail.com</a></p>
+                    <p>
+                        <a href="https://www.linkedin.com/in/divyanshu-purohit-949919250/" target="_blank">LinkedIn</a> ·
+                        <a href="https://github.com/Divyanshugowide" target="_blank">GitHub</a> ·
+                        <a href="https://portfolio.com" target="_blank">Portfolio</a>
+                    </p>
+                </div>
+                <form class="contact-form" action="#" onsubmit="return false;" aria-label="Contact form">
+                    <label><span>Name</span><input type="text" placeholder="Your name"></label>
+                    <label><span>Email</span><input type="email" placeholder="you@example.com"></label>
+                    <label><span>Message</span><textarea placeholder="Brief message"></textarea></label>
+                    <div class="form-row"><button class="btn">Send</button><button class="ghost" type="reset">Reset</button></div>
+                </form>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <small>© Divyanshu Purohit — Built with HTML/CSS/JS</small>
+        </footer>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
