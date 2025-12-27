@@ -4,15 +4,17 @@ const canvas = document.getElementById('neural-bg');
 const ctx = canvas.getContext('2d');
 const card = document.getElementById('card'); // Hero 3D card
 const typedEl = document.getElementById('typed-sub');
+const cursor = document.getElementById('custom-cursor');
+const progressBar = document.getElementById('scroll-progress');
 
 // Config
-const PARTICLE_COUNT = 60;
-const CONNECTION_DIST = 150;
-const MOUSE_DIST = 200;
+const PARTICLE_COUNT = 80;
+const CONNECTION_DIST = 160;
+const MOUSE_DIST = 250;
 
 let width, height;
 let particles = [];
-let mouse = { x: null, y: null };
+let mouse = { x: -100, y: -100 };
 
 // Resize
 function resize() {
@@ -25,43 +27,56 @@ resize();
 // Particle Class
 class Particle {
     constructor() {
+        this.reset();
+    }
+
+    reset() {
         this.x = Math.random() * width;
         this.y = Math.random() * height;
-        this.vx = (Math.random() - 0.5) * 0.5;
-        this.vy = (Math.random() - 0.5) * 0.5;
-        this.size = Math.random() * 2 + 1;
-        this.color = `rgba(56, 189, 248, ${Math.random() * 0.5 + 0.1})`; // Cyan-ish
+        this.vx = (Math.random() - 0.5) * 0.4;
+        this.vy = (Math.random() - 0.5) * 0.4;
+        this.size = Math.random() * 1.5 + 0.5;
+        this.baseAlpha = Math.random() * 0.3 + 0.1;
+        this.alpha = this.baseAlpha;
+        this.color = `rgba(56, 189, 248, ${this.alpha})`;
     }
 
     update() {
         this.x += this.vx;
         this.y += this.vy;
 
-        // Bounce
-        if (this.x < 0 || this.x > width) this.vx *= -1;
-        if (this.y < 0 || this.y > height) this.vy *= -1;
+        // Bounce with wrap-around instead for smoother feel
+        if (this.x < 0) this.x = width;
+        if (this.x > width) this.x = 0;
+        if (this.y < 0) this.y = height;
+        if (this.y > height) this.y = 0;
 
-        // Mouse interaction
-        if (mouse.x != null) {
-            let dx = mouse.x - this.x;
-            let dy = mouse.y - this.y;
-            let dist = Math.sqrt(dx * dx + dy * dy);
-            if (dist < MOUSE_DIST) {
-                const forceDirectionX = dx / dist;
-                const forceDirectionY = dy / dist;
-                const force = (MOUSE_DIST - dist) / MOUSE_DIST;
-                const directionX = forceDirectionX * force * 0.6; // Push strength
-                const directionY = forceDirectionY * force * 0.6;
-                this.vx -= directionX;
-                this.vy -= directionY;
-            }
+        // Mouse interaction (Soft pull/push)
+        let dx = mouse.x - this.x;
+        let dy = mouse.y - this.y;
+        let dist = Math.sqrt(dx * dx + dy * dy);
+        
+        if (dist < MOUSE_DIST) {
+            const force = (MOUSE_DIST - dist) / MOUSE_DIST;
+            this.vx += (dx / dist) * force * 0.02;
+            this.vy += (dy / dist) * force * 0.02;
+            this.alpha = Math.min(0.8, this.baseAlpha + force * 0.5);
+        } else {
+            this.alpha = this.baseAlpha;
+        }
+
+        // Limit speed
+        const speed = Math.sqrt(this.vx * this.vx + this.vy * this.vy);
+        if (speed > 1.5) {
+            this.vx *= 0.95;
+            this.vy *= 0.95;
         }
     }
 
     draw() {
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fillStyle = this.color;
+        ctx.fillStyle = `rgba(56, 189, 248, ${this.alpha})`;
         ctx.fill();
     }
 }
@@ -84,15 +99,16 @@ function animate() {
         particles[i].draw();
 
         // Connections
-        for (let j = i; j < particles.length; j++) {
+        for (let j = i + 1; j < particles.length; j++) {
             let dx = particles[i].x - particles[j].x;
             let dy = particles[i].y - particles[j].y;
             let dist = Math.sqrt(dx * dx + dy * dy);
 
             if (dist < CONNECTION_DIST) {
+                const opacity = (1 - dist / CONNECTION_DIST) * 0.4;
                 ctx.beginPath();
-                ctx.strokeStyle = `rgba(56, 189, 248, ${1 - dist / CONNECTION_DIST})`;
-                ctx.lineWidth = 1;
+                ctx.strokeStyle = `rgba(56, 189, 248, ${opacity})`;
+                ctx.lineWidth = 0.5;
                 ctx.moveTo(particles[i].x, particles[i].y);
                 ctx.lineTo(particles[j].x, particles[j].y);
                 ctx.stroke();
@@ -103,18 +119,69 @@ function animate() {
 }
 animate();
 
-// Mouse Move for Canvas
+// UI Elements Tracking
 window.addEventListener('mousemove', (e) => {
-    mouse.x = e.x;
-    mouse.y = e.y;
-});
-window.addEventListener('mouseleave', () => {
-    mouse.x = null;
-    mouse.y = null;
+    mouse.x = e.clientX;
+    mouse.y = e.clientY;
+
+    // Custom Cursor
+    if (cursor) {
+        cursor.style.left = e.clientX + 'px';
+        cursor.style.top = e.clientY + 'px';
+    }
+
+    // Parallax Headers
+    document.querySelectorAll('.panel h2').forEach(h2 => {
+        const rect = h2.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+        const dx = (e.clientX - centerX) / 20;
+        const dy = (e.clientY - centerY) / 20;
+        h2.style.transform = `translate(${dx}px, ${dy}px)`;
+    });
 });
 
+window.addEventListener('mousedown', () => cursor?.classList.add('click'));
+window.addEventListener('mouseup', () => cursor?.classList.remove('click'));
 
-// --- UI INTERACTIONS ---
+// Hover Effects for Cursor
+document.querySelectorAll('a, button, .tech-key, .project-card').forEach(el => {
+    el.addEventListener('mouseenter', () => cursor?.classList.add('hover'));
+    el.addEventListener('mouseleave', () => cursor?.classList.remove('hover'));
+});
+
+// Scroll Progress
+window.addEventListener('scroll', () => {
+    const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const scrolled = (winScroll / height) * 100;
+    if (progressBar) progressBar.style.width = scrolled + '%';
+});
+
+// Magnetic Elements
+document.querySelectorAll('.links a, .resume-btn, .cta-row .btn, .cta-row .ghost').forEach(el => {
+    el.addEventListener('mousemove', e => {
+        const rect = el.getBoundingClientRect();
+        const x = e.clientX - (rect.left + rect.width / 2);
+        const y = e.clientY - (rect.top + rect.height / 2);
+        el.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
+    });
+    el.addEventListener('mouseleave', () => {
+        el.style.transform = 'translate(0, 0)';
+    });
+});
+
+// Tech Keyboard Glow Effect
+const keyboard = document.querySelector('.tech-keyboard');
+if (keyboard) {
+    keyboard.addEventListener('mousemove', (e) => {
+        const rect = keyboard.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        keyboard.style.setProperty('--kb-x', `${x}px`);
+        keyboard.style.setProperty('--kb-y', `${y}px`);
+    });
+}
 
 // Spotlight Cards (Mouse Tracking Gradient)
 document.querySelectorAll('.spotlight-card').forEach(card => {
@@ -151,18 +218,16 @@ function typeTick() {
         tp.ch = 0;
     }
 
-    // Smooth typing randomizer
     typedEl.textContent = text.slice(0, Math.max(0, tp.ch));
-    let speed = 100;
-    if (tp.dir === -1) speed = 50;
-    if (tp.ch === text.length) speed = 1500; // Pause at full word
+    let speed = 80;
+    if (tp.dir === -1) speed = 40;
+    if (tp.ch === text.length) speed = 2000; 
 
     setTimeout(typeTick, speed);
 }
 typeTick();
 
-
-// 3D Hero Card Tilt (Simplified & Cleaner)
+// 3D Hero Card Tilt
 if (card) {
     const scene = document.getElementById('scene');
     scene.addEventListener('mousemove', (e) => {
@@ -172,8 +237,8 @@ if (card) {
 
         card.style.transform = `
             perspective(1000px)
-            rotateY(${mouseX * 10}deg)
-            rotateX(${-mouseY * 10}deg)
+            rotateY(${mouseX * 12}deg)
+            rotateX(${-mouseY * 12}deg)
             scale3d(1.02, 1.02, 1.02)
         `;
     });
@@ -183,7 +248,6 @@ if (card) {
     });
 }
 
-
 // Scroll Reveal
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -191,66 +255,24 @@ const observer = new IntersectionObserver((entries) => {
             entry.target.classList.add('active');
         }
     });
-}, { threshold: 0.1 });
+}, { threshold: 0.15 });
 
-document.querySelectorAll('.panel, .exp, .project-card, .skill-category').forEach(el => {
+document.querySelectorAll('.panel, .exp, .project-card, .skill-category, .tech-keyboard').forEach(el => {
     el.classList.add('reveal');
     observer.observe(el);
 });
 
-
-// Mobile Menu
-const menuToggle = document.querySelector('.menu-toggle');
-const navLinks = document.querySelector('.links');
-if (menuToggle) {
-    menuToggle.addEventListener('click', () => {
-        navLinks.classList.toggle('show');
-    });
-}
-
-// Contact Form Animation & Logic
-const contactForm = document.getElementById('contactForm');
-if (contactForm) {
-    contactForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const btn = contactForm.querySelector('.send-btn');
-        const originalText = btn.innerHTML; // Save state
-
-        // Basic Validation (HTML5 handles most)
-        if (!contactForm.checkValidity()) return;
-
-        // Trigger Fly Animation
-        btn.classList.add('flying');
-
-        // Simulate Network Request (or use Fetch for Formspree)
-        // const formData = new FormData(contactForm);
-        // fetch(contactForm.action, { method: 'POST', body: formData, headers: { 'Accept': 'application/json' } });
-
-        // Visual Success Delay (Waiting for flight)
-        setTimeout(() => {
-            btn.classList.remove('flying');
-            btn.classList.add('success');
-            contactForm.reset();
-
-            // Revert button after 3 seconds
-            setTimeout(() => {
-                btn.classList.remove('success');
-            }, 3000);
-        }, 1500); // 1.5s matches animation duration
-    });
-}
-
-// Modal Logic (Reused)
+// Modal Logic
 const projectData = {
     garuda: { 
         title: 'Garuda AI — Neural Surveillance', 
         tags: ['AI', 'Computer Vision', 'Surveillance', 'Gemini 3 Pro'], 
         body: 'Garuda AI is an autonomous neural surveillance platform engineered for real-time threat detection, defence-grade monitoring, and precision analytics. From identifying human intrusion and hostile movements to alerting early fire ignition or drone activity, Garuda delivers superhuman situational awareness, 24/7. Built for industry, critical infrastructure, defence, and border security, it transforms ordinary cameras into intelligent vision systems—capable of understanding intent, predicting behavior, and capturing forensic-level evidence. Powered by Google Gemini 3 Pro AI.' 
     },
-    nrrc: { title: 'NRRC AI', tags: ['RAG', 'Embeddings'], body: 'Full-stack AI retrieval system.' },
-    crystal: { title: 'Crystal AI', tags: ['LLM', 'FastAPI'], body: 'Personal assistant with memory.' },
-    face: { title: 'Emotion Detection', tags: ['CV', 'TensorFlow'], body: 'Real-time emotion classification.' },
-    finder: { title: 'Article Finder', tags: ['FAISS', 'Local'], body: 'Offline semantic search engine.' }
+    nrrc: { title: 'Arabic Article Finder', tags: ['RAG', 'Embeddings', 'FastAPI'], body: 'Multi-stage reasoning engine for document parsing, embeddings, and retrieval with production microservices.' },
+    crystal: { title: 'Crystal AI', tags: ['LLM', 'RAG', 'FastAPI', 'Docker'], body: 'Personal AI with long-term memory, contextual reasoning, and modular skills.' },
+    face: { title: 'Face Emotion Detection', tags: ['OpenCV', 'TensorFlow'], body: 'Real-time CNN + OpenCV pipeline for seven emotion classes.' },
+    finder: { title: 'Offline Article Finder', tags: ['FAISS', 'BM25'], body: 'FAISS + BM25 hybrid retrieval system using SentenceTransformer embeddings.' }
 };
 const modal = document.getElementById('projectModal');
 const modalTitle = document.getElementById('modalTitle');
@@ -264,14 +286,20 @@ function openModal(key) {
         modalBody.textContent = d.body;
         modalTags.innerHTML = d.tags.map(t => `<span class="skill-tag">${t}</span>`).join('');
         modal.classList.remove('hide');
+        document.body.style.overflow = 'hidden'; // Lock scroll
     }
 }
+
 document.querySelectorAll('.open-project').forEach(btn => {
     btn.addEventListener('click', (e) => {
         const key = e.target.closest('.project-card').dataset.project;
         openModal(key);
     });
 });
+
 document.querySelectorAll('.modal-close, .modal-backdrop').forEach(el => {
-    el.addEventListener('click', () => modal.classList.add('hide'));
+    el.addEventListener('click', () => {
+        modal.classList.add('hide');
+        document.body.style.overflow = ''; // Unlock scroll
+    });
 });
