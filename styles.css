@@ -69,27 +69,116 @@ body {
     background: var(--accent-2);
 }
 
-/* Custom Cursor */
+/* Custom Cursor - 3D Cyberpunk */
 #custom-cursor {
-    width: 20px;
-    height: 20px;
-    background: var(--accent-1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 99999;
+    mix-blend-mode: normal;
+}
+
+.cursor-dot {
+    width: 6px;
+    height: 6px;
+    background: #fff;
     border-radius: 50%;
     position: fixed;
-    pointer-events: none;
-    z-index: 10001;
-    mix-blend-mode: difference;
-    transition: transform 0.15s ease-out, background 0.3s ease;
     transform: translate(-50%, -50%);
+    box-shadow: 0 0 15px var(--accent-1), 0 0 30px var(--accent-1);
+    z-index: 100;
 }
 
-#custom-cursor.hover {
-    transform: translate(-50%, -50%) scale(3);
-    background: white;
+.cursor-ring {
+    width: 40px;
+    height: 40px;
+    border: 2px solid var(--accent-1);
+    border-radius: 4px; /* Square with rounded corners */
+    position: fixed;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s, height 0.3s, border-radius 0.3s, border-color 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-#custom-cursor.click {
-    transform: translate(-50%, -50%) scale(1.5);
+/* Corner Brackets for Ring */
+.cursor-ring::before, .cursor-ring::after {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-color: var(--accent-3);
+    border-style: solid;
+    transition: all 0.3s;
+}
+
+.cursor-ring::before {
+    top: -5px;
+    left: -5px;
+    border-width: 2px 0 0 2px;
+}
+
+.cursor-ring::after {
+    bottom: -5px;
+    right: -5px;
+    border-width: 0 2px 2px 0;
+}
+
+.cursor-glitch {
+    position: fixed;
+    width: 60px;
+    height: 2px;
+    background: var(--accent-3);
+    opacity: 0;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    box-shadow: 0 0 10px var(--accent-3);
+}
+
+/* Cursor States */
+#custom-cursor.hover .cursor-dot {
+    background: var(--accent-3);
+    transform: translate(-50%, -50%) scale(0.5);
+}
+
+#custom-cursor.hover .cursor-ring {
+    width: 60px;
+    height: 60px;
+    border-color: var(--accent-3);
+    border-radius: 50%;
+    border-style: dashed;
+}
+
+#custom-cursor.hover .cursor-ring::before {
+    content: '';
+    position: absolute;
+    inset: -5px;
+    border: 2px dashed var(--accent-3);
+    border-radius: 50%;
+    animation: rotateRing 4s linear infinite;
+}
+
+#custom-cursor.hover .cursor-ring::after {
+    display: none; /* Hide the other bracket in hover circle mode */
+}
+
+@keyframes rotateRing {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes glitchCursor {
+    0% { transform: translate(-52%, -48%) scaleX(1.5); opacity: 0.8; }
+    50% { transform: translate(-48%, -52%) scaleX(0.5); opacity: 0.4; }
+    100% { transform: translate(-50%, -50%) scaleX(1); opacity: 0; }
+}
+
+@media (max-width: 768px) {
+    #custom-cursor { display: none; }
 }
 
 /* Scroll Progress */

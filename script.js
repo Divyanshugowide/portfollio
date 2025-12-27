@@ -120,14 +120,29 @@ function animate() {
 animate();
 
 // UI Elements Tracking
+const cursorDot = document.querySelector('.cursor-dot');
+const cursorRing = document.querySelector('.cursor-ring');
+const cursorGlitch = document.querySelector('.cursor-glitch');
+
+let cursorX = 0, cursorY = 0;
+let ringX = 0, ringY = 0;
+let lastX = 0, lastY = 0;
+
 window.addEventListener('mousemove', (e) => {
     mouse.x = e.clientX;
     mouse.y = e.clientY;
 
-    // Custom Cursor
-    if (cursor) {
-        cursor.style.left = e.clientX + 'px';
-        cursor.style.top = e.clientY + 'px';
+    cursorX = e.clientX;
+    cursorY = e.clientY;
+
+    if (cursorDot) {
+        cursorDot.style.left = cursorX + 'px';
+        cursorDot.style.top = cursorY + 'px';
+    }
+    
+    if (cursorGlitch) {
+        cursorGlitch.style.left = cursorX + 'px';
+        cursorGlitch.style.top = cursorY + 'px';
     }
 
     // Parallax Headers
@@ -140,6 +155,29 @@ window.addEventListener('mousemove', (e) => {
         h2.style.transform = `translate(${dx}px, ${dy}px)`;
     });
 });
+
+function updateCursor() {
+    // Lerp for Ring
+    ringX += (cursorX - ringX) * 0.15;
+    ringY += (cursorY - ringY) * 0.15;
+
+    if (cursorRing) {
+        // Calculate Velocity for 3D Tilt
+        const vx = cursorX - lastX;
+        const vy = cursorY - lastY;
+        const tiltX = Math.min(Math.max(vy * 0.5, -20), 20);
+        const tiltY = Math.min(Math.max(-vx * 0.5, -20), 20);
+        
+        cursorRing.style.left = ringX + 'px';
+        cursorRing.style.top = ringY + 'px';
+        cursorRing.style.transform = `translate(-50%, -50%) rotateX(${tiltX}deg) rotateY(${tiltY}deg)`;
+    }
+
+    lastX = cursorX;
+    lastY = cursorY;
+    requestAnimationFrame(updateCursor);
+}
+updateCursor();
 
 window.addEventListener('mousedown', () => cursor?.classList.add('click'));
 window.addEventListener('mouseup', () => cursor?.classList.remove('click'));
