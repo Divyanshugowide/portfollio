@@ -1760,17 +1760,9 @@ body {
         align-items: center;
     }
     
-    .desk-surface::before { 
-        position: relative;
-        width: 95vw; 
-        max-width: 500px; 
-        height: 180px;
-        margin-top: 20px;
-    }
+    .desk-surface::before,
     .desk-surface::after { 
-        width: 85vw; 
-        max-width: 420px; 
-        height: 150px; 
+        display: none;
     }
     
     .monitor {
@@ -1824,12 +1816,17 @@ body {
         position: relative;
         bottom: 0;
         left: 0;
-        transform: perspective(1000px) rotateX(45deg) scale(0.5);
-        margin-top: -30px;
+        transform: perspective(1000px) rotateX(35deg) scale(0.55);
+        margin-top: 10px;
     }
     .keyboard-base::before { display: none; }
     .mouse { display: none; }
     .stream-deck { display: none; }
+    
+    .desk-surface::before,
+    .desk-surface::after {
+        display: none;
+    }
     
     .panel { 
         padding: 32px 20px; 
@@ -1919,21 +1916,8 @@ body {
     }
     
     .keyboard { 
-        transform: perspective(1000px) rotateX(40deg) scale(0.4); 
-        margin-top: -20px;
-    }
-    
-    .desk-surface::before { 
-        width: 95vw; 
-        max-width: 400px; 
-        height: 150px; 
-        border-radius: 10px 10px 0 0; 
-    }
-    .desk-surface::after { 
-        width: 85vw; 
-        max-width: 350px; 
-        height: 120px; 
-        border-radius: 8px; 
+        transform: perspective(1000px) rotateX(35deg) scale(0.45); 
+        margin-top: 10px;
     }
     
     .panel { 
@@ -2042,12 +2026,12 @@ body {
     .contact-row { font-size: 6px; gap: 1px; margin-bottom: 4px; }
     
     .keyboard { 
-        transform: perspective(1000px) rotateX(38deg) scale(0.32); 
-        margin-top: -15px;
+        transform: perspective(1000px) rotateX(35deg) scale(0.35); 
+        margin-top: 10px;
     }
     
-    .desk-surface::before { width: 95vw; max-width: 320px; height: 120px; }
-    .desk-surface::after { width: 85vw; max-width: 280px; height: 100px; }
+    .desk-surface::before,
+    .desk-surface::after { display: none; }
     
     .panel { padding: 20px 14px; margin: 0 6px 16px; }
     .panel h2 { font-size: 16px; }
