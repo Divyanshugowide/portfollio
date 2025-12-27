@@ -1600,404 +1600,434 @@ body {
 }
 
 /* ===================================== */
-/* 3D DESKTOP SETUP - Monitor, Keyboard, Mouse */
+/* 3D DESKTOP SETUP - REFINED TO PHOTO */
 /* ===================================== */
 
 .desktop-setup {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    perspective: 1500px;
-    padding: 40px 20px;
-    position: relative;
-    overflow: visible;
+    background: radial-gradient(circle at 50% 100%, #1e293b, #020617);
+    perspective: 2000px;
+}
+
+.desktop-setup::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 400px;
+    background: 
+        linear-gradient(rgba(2, 6, 23, 0.7), rgba(2, 6, 23, 0.7)),
+        url('https://www.transparenttextures.com/patterns/dark-wood.png');
+    transform: rotateX(60deg);
+    transform-origin: bottom;
+    z-index: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .setup-container {
-    position: relative;
-    width: 100%;
-    max-width: 1200px;
-    height: 800px;
-    transform-style: preserve-3d;
-    transform: rotateX(15deg);
+    transform: rotateX(10deg);
 }
 
-/* ===== 3D MONITOR ===== */
-.monitor-3d {
+/* MONITOR REFINEMENT */
+.monitor-bezel {
+    width: 850px; /* Wider like photo */
+    height: 480px;
+    background: #0f172a;
+    border-radius: 12px;
+    padding: 10px;
+    box-shadow: 
+        0 20px 50px rgba(0,0,0,0.8),
+        inset 0 1px 1px rgba(255,255,255,0.1);
+    transform: translateZ(50px) rotateY(0deg);
+}
+
+.monitor-screen {
+    background: #020617;
+    border-radius: 4px;
+    box-shadow: inset 0 0 40px rgba(0,0,0,1);
+    border: 1px solid #1e293b;
+}
+
+/* Monitor OS UI */
+.monitor-os {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    position: relative;
+    font-family: var(--font-body);
+}
+
+.os-header {
+    background: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    padding: 15px 30px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    gap: 30px;
+}
+
+.os-user {
+    font-weight: 800;
+    font-size: 20px;
+    color: #fff;
+    width: 150px;
+}
+
+.resume-os-btn {
+    background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+    color: #020617;
+    padding: 8px 16px;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+    box-shadow: 0 4px 15px rgba(56, 189, 248, 0.3);
+}
+
+.os-links {
+    display: flex;
+    gap: 25px;
+    margin-left: auto;
+}
+
+.os-links a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.os-links a:hover {
+    color: #fff;
+}
+
+.os-num {
+    color: var(--accent-1);
+    font-family: var(--font-mono);
+    margin-right: 4px;
+    opacity: 0.8;
+}
+
+.os-content {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+}
+
+.os-hero {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    max-width: 700px;
+}
+
+.os-profile {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.os-profile img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.os-info {
+    flex: 1;
+}
+
+.os-lede {
+    font-size: 18px;
+    color: #cbd5e1;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.os-contact-info {
+    display: flex;
+    gap: 20px;
+    font-size: 14px;
+    margin-bottom: 30px;
+}
+
+.os-phone {
+    color: #94a3b8;
+}
+
+.os-email {
+    color: #fff;
+    text-decoration: underline;
+}
+
+.os-cta {
+    display: flex;
+    gap: 15px;
+}
+
+.os-cta-btn {
+    padding: 12px 25px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+.os-cta-btn.primary {
+    background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+    color: #020617;
+    box-shadow: 0 4px 15px rgba(56, 189, 248, 0.3);
+}
+
+.os-cta-btn.secondary {
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #fff;
+}
+
+/* SIDE PAD REFINEMENT */
+.side-pad-3d {
     position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%) translateZ(50px);
+    bottom: 50px;
+    left: 50px;
+    transform: rotateY(20deg);
     transform-style: preserve-3d;
     z-index: 10;
 }
 
-.monitor-frame {
-    transform-style: preserve-3d;
-    position: relative;
-}
-
-.monitor-bezel {
-    width: 700px;
-    height: 420px;
-    background: linear-gradient(145deg, #1a1a2e 0%, #0d0d1a 50%, #16213e 100%);
-    border-radius: 20px;
-    padding: 15px;
-    position: relative;
-    box-shadow: 
-        0 0 0 3px #2d2d4a,
-        0 0 0 6px #1a1a2e,
-        0 30px 60px rgba(0, 0, 0, 0.7),
-        inset 0 2px 4px rgba(255, 255, 255, 0.05);
-    transform-style: preserve-3d;
-}
-
-.monitor-bezel::before {
-    content: '';
-    position: absolute;
-    top: -8px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80px;
-    height: 8px;
-    background: linear-gradient(180deg, #2d2d4a, #1a1a2e);
-    border-radius: 0 0 4px 4px;
-}
-
-.monitor-screen {
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, #0a0a15 0%, #0f0f1f 100%);
-    border-radius: 8px;
-    overflow: hidden;
-    position: relative;
-    box-shadow: 
-        inset 0 0 100px rgba(56, 189, 248, 0.05),
-        inset 0 0 30px rgba(0, 0, 0, 0.8);
-}
-
-.screen-content {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    position: relative;
-    z-index: 2;
-}
-
-.screen-content .card {
-    width: 100%;
-    max-width: none;
-    margin: 0;
-    transform: none !important;
-}
-
-.screen-content .card__bg {
-    border-radius: 12px;
-    border-width: 2px;
-}
-
-.screen-content .card__content {
-    padding: 30px 25px;
-    gap: 25px;
-}
-
-.screen-content .profile {
-    width: 100px;
-    height: 100px;
-}
-
-.screen-content .name {
-    font-size: 32px;
-}
-
-.screen-content .role {
-    font-size: 14px;
-}
-
-.screen-content .lede {
-    font-size: 13px;
-    max-width: 350px;
-}
-
-.screen-content .contact-inline {
-    font-size: 11px;
-    gap: 12px;
-}
-
-.screen-content .cta-row {
-    margin-top: 15px;
-    gap: 12px;
-}
-
-.screen-content .monitor-btn {
-    padding: 10px 20px;
-    font-size: 12px;
-}
-
-.screen-scanlines {
-    position: absolute;
-    inset: 0;
-    background: repeating-linear-gradient(
-        0deg,
-        transparent,
-        transparent 2px,
-        rgba(0, 0, 0, 0.1) 2px,
-        rgba(0, 0, 0, 0.1) 4px
-    );
-    pointer-events: none;
-    z-index: 3;
-    opacity: 0.3;
-}
-
-.screen-glow {
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(
-        ellipse at center,
-        rgba(56, 189, 248, 0.08) 0%,
-        transparent 70%
-    );
-    pointer-events: none;
-    z-index: 1;
-    animation: screenPulse 4s ease-in-out infinite;
-}
-
-@keyframes screenPulse {
-    0%, 100% { opacity: 0.5; }
-    50% { opacity: 1; }
-}
-
-.monitor-led {
-    position: absolute;
-    bottom: -25px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 8px;
-    height: 8px;
-    background: #00ff88;
-    border-radius: 50%;
-    box-shadow: 0 0 10px #00ff88, 0 0 20px #00ff88;
-    animation: ledBlink 2s ease-in-out infinite;
-}
-
-@keyframes ledBlink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.5; }
-}
-
-.monitor-brand {
-    position: absolute;
-    bottom: -22px;
-    left: 50%;
-    transform: translateX(-50%) translateX(30px);
-    font-family: var(--font-mono);
-    font-size: 10px;
-    color: #4a4a6a;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-}
-
-/* Monitor Stand */
-.monitor-stand {
-    position: absolute;
-    bottom: -120px;
-    left: 50%;
-    transform: translateX(-50%);
-    transform-style: preserve-3d;
-}
-
-.stand-neck {
-    width: 60px;
-    height: 80px;
-    background: linear-gradient(90deg, #1a1a2e 0%, #2d2d4a 50%, #1a1a2e 100%);
-    margin: 0 auto;
-    border-radius: 5px;
-    box-shadow: 
-        inset -5px 0 10px rgba(0, 0, 0, 0.5),
-        inset 5px 0 10px rgba(255, 255, 255, 0.05);
-}
-
-.stand-base {
+.pad-body {
     width: 200px;
-    height: 20px;
-    background: linear-gradient(180deg, #2d2d4a 0%, #1a1a2e 100%);
-    border-radius: 10px 10px 50% 50%;
-    margin-top: -5px;
+    background: #0f172a;
+    border-radius: 12px;
+    padding: 15px;
     box-shadow: 
-        0 10px 30px rgba(0, 0, 0, 0.6),
-        inset 0 2px 4px rgba(255, 255, 255, 0.1);
+        0 10px 0 0 #020617,
+        0 15px 30px rgba(0,0,0,0.6);
 }
 
-.monitor-reflection {
-    position: absolute;
-    bottom: -150px;
-    left: 50%;
-    transform: translateX(-50%) rotateX(180deg) scaleY(0.3);
-    width: 700px;
-    height: 420px;
-    background: linear-gradient(180deg, rgba(56, 189, 248, 0.1), transparent);
-    opacity: 0.15;
-    filter: blur(10px);
-    pointer-events: none;
-}
-
-/* ===== CABLES SVG ===== */
-.cables-svg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 5;
-}
-
-.cable {
-    fill: none;
-    stroke-linecap: round;
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
-}
-
-.keyboard-cable {
-    stroke-width: 6;
-}
-
-.mouse-cable {
-    stroke-width: 4;
-}
-
-/* ===== 3D KEYBOARD ===== */
-.keyboard-3d {
-    position: absolute;
-    bottom: 80px;
-    left: 50%;
-    transform: translateX(-50%) translateZ(0);
-    transform-style: preserve-3d;
-    cursor: grab;
-    z-index: 8;
-    transition: transform 0.1s ease-out;
-}
-
-.keyboard-3d:active {
-    cursor: grabbing;
-}
-
-.keyboard-3d.dragging {
-    z-index: 100;
-    transition: none;
-}
-
-.keyboard-body {
-    background: linear-gradient(145deg, #1e293b 0%, #0f172a 50%, #1e293b 100%);
-    padding: 20px 25px 25px;
-    border-radius: 16px;
-    position: relative;
-    transform-style: preserve-3d;
-    box-shadow: 
-        0 15px 0 0 #0a0f1a,
-        0 20px 40px rgba(0, 0, 0, 0.8),
-        inset 0 1px 2px rgba(255, 255, 255, 0.1);
-}
-
-.keyboard-body::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, 
-        var(--accent-1), 
-        var(--accent-2), 
-        var(--accent-3), 
-        var(--accent-2), 
-        var(--accent-1)
-    );
-    border-radius: 16px 16px 0 0;
-    opacity: 0.8;
-}
-
-.keyboard-plate {
-    display: flex;
-    flex-direction: column;
+.pad-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     gap: 12px;
-    transform-style: preserve-3d;
 }
 
-.key-row {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    transform-style: preserve-3d;
-}
-
-.tech-key {
-    position: relative;
-    width: 90px;
-    height: 70px;
+.pad-btn {
+    background: #1e293b;
+    border-radius: 8px;
+    height: 50px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 6px;
-    background: linear-gradient(180deg, #2d3e5a 0%, #1a2744 100%);
-    border-radius: 10px;
     cursor: pointer;
-    transform-style: preserve-3d;
-    transform: translateZ(8px);
-    transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 
-        0 6px 0 0 #0d1525,
-        0 8px 15px rgba(0, 0, 0, 0.5),
-        inset 0 1px 2px rgba(255, 255, 255, 0.15);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(56, 189, 248, 0.3);
+    box-shadow: 0 0 10px rgba(56, 189, 248, 0.1);
+    transition: all 0.2s;
 }
 
-.tech-key i {
-    font-size: 26px;
+.pad-btn:last-child {
+    grid-column: span 2;
+    width: 100px;
+    margin: 0 auto;
+}
+
+.pad-btn i {
+    font-size: 16px;
     color: var(--accent-1);
-    filter: drop-shadow(0 0 8px var(--accent-glow));
-    transition: all 0.2s ease;
+    margin-bottom: 4px;
+}
+
+.pad-btn span {
+    font-family: var(--font-mono);
+    font-size: 8px;
+    color: #94a3b8;
+}
+
+.pad-btn:hover {
+    border-color: var(--accent-1);
+    box-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
     transform: translateZ(5px);
 }
 
-.tech-key span {
+.pad-btn:active {
+    transform: translateZ(1px);
+    box-shadow: 0 0 5px rgba(56, 189, 248, 0.2);
+}
+
+/* VIRTUAL BROWSER */
+.virtual-browser {
+    position: absolute;
+    inset: 20px;
+    background: #0f172a;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    z-index: 100;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    animation: browserPop 0.4s cubic-bezier(0.17, 0.67, 0.83, 0.67);
+}
+
+@keyframes browserPop {
+    from { opacity: 0; transform: scale(0.9) translateY(20px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.browser-bar {
+    background: #1e293b;
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    border-radius: 12px 12px 0 0;
+}
+
+.browser-dots {
+    display: flex;
+    gap: 6px;
+}
+
+.browser-dots span {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+
+.browser-dots span:nth-child(1) { background: #ff5f56; }
+.browser-dots span:nth-child(2) { background: #ffbd2e; }
+.browser-dots span:nth-child(3) { background: #27c93f; }
+
+.browser-url {
+    flex: 1;
+    background: #020617;
+    padding: 4px 12px;
+    border-radius: 4px;
+    font-size: 11px;
+    color: #94a3b8;
     font-family: var(--font-mono);
-    font-size: 9px;
-    color: #8896ab;
-    text-transform: uppercase;
-    letter-spacing: 1px;
 }
 
-.tech-key:hover {
-    transform: translateZ(12px) translateY(-3px);
-    background: linear-gradient(180deg, #3d4e6a 0%, #2a3754 100%);
-    box-shadow: 
-        0 10px 0 0 #0d1525,
-        0 15px 30px rgba(56, 189, 248, 0.2),
-        inset 0 1px 3px rgba(255, 255, 255, 0.2);
-}
-
-.tech-key:hover i {
+.browser-close {
+    background: transparent;
+    border: none;
     color: #fff;
-    filter: drop-shadow(0 0 15px var(--accent-1));
-    transform: translateZ(10px) scale(1.1);
+    cursor: pointer;
+    font-size: 16px;
 }
 
-.tech-key:hover span {
+.browser-frame {
+    flex: 1;
+    background: #020617;
+    padding: 30px;
+    overflow-y: auto;
+}
+
+.browser-content h2 {
+    font-size: 32px;
     color: #fff;
+    margin-bottom: 20px;
+    border: none !important;
 }
 
-.tech-key:active {
-    transform: translateZ(2px) translateY(4px);
+.browser-content p {
+    color: #94a3b8;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.skill-list {
+    list-style: none;
+    padding: 0;
+}
+
+.skill-list li {
+    color: var(--accent-1);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.skill-list li::before {
+    content: '→';
+}
+
+/* KEYBOARD REFINEMENT */
+.keyboard-3d {
+    bottom: 40px;
+    transform: rotateX(5deg);
+}
+
+.keyboard-body {
+    padding: 15px 15px 20px;
+}
+
+.tech-key {
+    width: 70px; /* Smaller more keys */
+    height: 55px;
+    background: #1e293b;
+}
+
+.tech-key i {
+    font-size: 20px;
+}
+
+.tech-key span {
+    font-size: 8px;
+}
+
+/* MOUSE REFINEMENT */
+.mouse-3d {
+    position: absolute;
+    bottom: 60px;
+    right: 80px;
+    transform: rotateY(-15deg);
+}
+
+.mouse-body {
+    width: 60px;
+    height: 100px;
+    background: #0f172a;
+    border-radius: 30px 30px 40px 40px;
     box-shadow: 
-        0 2px 0 0 #0d1525,
-        0 4px 10px rgba(0, 0, 0, 0.6),
-        inset 0 2px 4px rgba(0, 0, 0, 0.3);
+        0 10px 20px rgba(0,0,0,0.5),
+        inset 0 1px 1px rgba(255,255,255,0.1);
+}
+
+.mouse-top {
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.mouse-left-btn, .mouse-right-btn {
+    width: 20px;
+    height: 40px;
+    background: #1e293b;
+    border-radius: 15px 15px 5px 5px;
+}
+
+.mouse-scroll {
+    width: 8px;
+    height: 20px;
+    background: #334155;
+    border-radius: 4px;
+    box-shadow: 0 0 10px var(--accent-glow);
+}
+
+/* CABLES */
+.cable {
+    stroke: #1e293b;
+    opacity: 0.8;
 }
 
 .keyboard-cable-port {

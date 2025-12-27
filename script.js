@@ -343,42 +343,92 @@ document.querySelectorAll('.modal-close, .modal-backdrop').forEach(el => {
 });
 
 // ===================================
-// 3D DESKTOP SETUP - Draggable Peripherals & Virtual Cursor
+// 3D DESKTOP SETUP - REFINED LOGIC
 // ===================================
 
 const setupContainer = document.querySelector('.setup-container');
 const keyboard3d = document.getElementById('keyboard3d');
 const mouse3d = document.getElementById('mouse3d');
+const sidePad3d = document.getElementById('sidePad3d');
 const monitorScreen = document.getElementById('monitorScreen');
 const virtualCursor = document.getElementById('virtualCursor');
 const cablesSvg = document.getElementById('cablesSvg');
 const keyboardCable = document.getElementById('keyboardCable');
 const mouseCable = document.getElementById('mouseCable');
+const padCable = document.getElementById('padCable');
+
+// Virtual Browser elements
+const virtualBrowser = document.getElementById('virtualBrowser');
+const closeBrowser = document.getElementById('closeBrowser');
+const skillTitle = document.getElementById('skillTitle');
+const skillDesc = document.getElementById('skillDesc');
+const browserUrl = document.getElementById('browserUrl');
+
+const skillDetails = {
+    pytorch: {
+        title: 'PyTorch',
+        url: 'https://portfolio.ai/skills/pytorch',
+        desc: '<p>Deep Learning research and production model development.</p><ul><li>Distributed training</li><li>TorchScript optimization</li><li>Custom Autograd functions</li></ul>'
+    },
+    nlp: {
+        title: 'Natural Language Processing',
+        url: 'https://portfolio.ai/skills/nlp',
+        desc: '<p>Advanced text understanding and generation systems.</p><ul><li>Transformer architectures</li><li>Tokenization & Embeddings</li><li>Semantic Search (RAG)</li></ul>'
+    },
+    docker: {
+        title: 'Docker',
+        url: 'https://portfolio.ai/skills/docker',
+        desc: '<p>Containerization and deployment workflows for production AI systems.</p><ul class="skill-list"><li>Multi-stage builds</li><li>GPU-accelerated containers</li><li>Microservices orchestration</li></ul>'
+    },
+    tensorflow: {
+        title: 'TensorFlow',
+        url: 'https://portfolio.ai/skills/tensorflow',
+        desc: '<p>Scalable machine learning pipelines and mobile deployment.</p><ul><li>TF Data pipelines</li><li>TFLite for Edge AI</li><li>Keras functional API</li></ul>'
+    },
+    network: {
+        title: 'Neural Networks',
+        url: 'https://portfolio.ai/skills/networks',
+        desc: '<p>Fundamental and advanced neural architecture design.</p><ul><li>CNNs for Vision</li><li>RNNs/LSTMs for Sequences</li><li>GANs & VAEs</li></ul>'
+    }
+};
 
 let isDragging = null;
 let dragOffset = { x: 0, y: 0 };
 let peripheralPositions = {
     keyboard: { x: 0, y: 0 },
-    mouse: { x: 0, y: 0 }
+    mouse: { x: 0, y: 0 },
+    pad: { x: 0, y: 0 }
 };
 
 // Initialize positions
 function initSetupPositions() {
-    if (!setupContainer || !keyboard3d || !mouse3d) return;
+    if (!setupContainer) return;
     
     const containerRect = setupContainer.getBoundingClientRect();
     
-    // Set initial keyboard position (centered bottom)
-    peripheralPositions.keyboard = {
-        x: containerRect.width / 2 - keyboard3d.offsetWidth / 2,
-        y: containerRect.height - 220
-    };
+    // Set initial keyboard position (centered)
+    if (keyboard3d) {
+        peripheralPositions.keyboard = {
+            x: containerRect.width / 2 - keyboard3d.offsetWidth / 2,
+            y: containerRect.height - 180
+        };
+    }
     
-    // Set initial mouse position (right side)
-    peripheralPositions.mouse = {
-        x: containerRect.width - 280,
-        y: containerRect.height - 180
-    };
+    // Set initial mouse position (right)
+    if (mouse3d) {
+        peripheralPositions.mouse = {
+            x: containerRect.width - 250,
+            y: containerRect.height - 160
+        };
+    }
+
+    // Set initial pad position (left)
+    if (sidePad3d) {
+        peripheralPositions.pad = {
+            x: 80,
+            y: containerRect.height - 180
+        };
+    }
     
     updatePeripheralPositions();
     updateCables();
@@ -388,18 +438,21 @@ function updatePeripheralPositions() {
     if (keyboard3d) {
         keyboard3d.style.left = peripheralPositions.keyboard.x + 'px';
         keyboard3d.style.top = peripheralPositions.keyboard.y + 'px';
-        keyboard3d.style.transform = 'translateZ(0)';
     }
     if (mouse3d) {
         mouse3d.style.left = peripheralPositions.mouse.x + 'px';
         mouse3d.style.top = peripheralPositions.mouse.y + 'px';
     }
+    if (sidePad3d) {
+        sidePad3d.style.left = peripheralPositions.pad.x + 'px';
+        sidePad3d.style.top = peripheralPositions.pad.y + 'px';
+    }
 }
 
 // Dragging Logic
 function startDrag(e, element, type) {
-    if (e.target.closest('.tech-key') || e.target.closest('.mouse-left-btn') || 
-        e.target.closest('.mouse-right-btn') || e.target.closest('.mouse-scroll')) {
+    if (e.target.closest('.tech-key') || e.target.closest('.pad-btn') || 
+        e.target.closest('.mouse-top') || e.target.closest('a')) {
         return;
     }
     
@@ -408,7 +461,6 @@ function startDrag(e, element, type) {
     element.classList.add('dragging');
     
     const rect = element.getBoundingClientRect();
-    const containerRect = setupContainer.getBoundingClientRect();
     const clientX = e.touches ? e.touches[0].clientX : e.clientX;
     const clientY = e.touches ? e.touches[0].clientY : e.clientY;
     
@@ -432,8 +484,8 @@ function onDrag(e) {
     const elementWidth = isDragging.element.offsetWidth;
     const elementHeight = isDragging.element.offsetHeight;
     
-    newX = Math.max(0, Math.min(newX, containerRect.width - elementWidth));
-    newY = Math.max(300, Math.min(newY, containerRect.height - elementHeight));
+    newX = Math.max(-50, Math.min(newX, containerRect.width - elementWidth + 50));
+    newY = Math.max(350, Math.min(newY, containerRect.height - elementHeight));
     
     peripheralPositions[isDragging.type] = { x: newX, y: newY };
     
@@ -452,124 +504,120 @@ function endDrag() {
 
 // Cable Drawing
 function updateCables() {
-    if (!cablesSvg || !keyboardCable || !mouseCable || !setupContainer) return;
+    if (!cablesSvg || !setupContainer) return;
     
     const containerRect = setupContainer.getBoundingClientRect();
     cablesSvg.setAttribute('width', containerRect.width);
     cablesSvg.setAttribute('height', containerRect.height);
     
-    // Monitor connection point (center bottom of stand)
+    // Monitor connection point (stand area)
     const monitorCenterX = containerRect.width / 2;
-    const monitorBottomY = 550;
+    const monitorBottomY = 520;
     
     // Keyboard cable
-    if (keyboard3d) {
-        const kbRect = keyboard3d.getBoundingClientRect();
-        const kbX = peripheralPositions.keyboard.x + keyboard3d.offsetWidth;
-        const kbY = peripheralPositions.keyboard.y + keyboard3d.offsetHeight / 2;
-        
-        const kbPath = generateCablePath(kbX, kbY, monitorCenterX, monitorBottomY);
-        keyboardCable.setAttribute('d', kbPath);
+    if (keyboard3d && keyboardCable) {
+        const kbX = peripheralPositions.keyboard.x + keyboard3d.offsetWidth / 2;
+        const kbY = peripheralPositions.keyboard.y + 10;
+        keyboardCable.setAttribute('d', generateCablePath(kbX, kbY, monitorCenterX, monitorBottomY));
     }
     
     // Mouse cable
-    if (mouse3d) {
-        const mouseX = peripheralPositions.mouse.x + mouse3d.offsetWidth / 2;
+    if (mouse3d && mouseCable) {
+        const mouseX = peripheralPositions.mouse.x + 30;
         const mouseY = peripheralPositions.mouse.y;
-        
-        const mousePath = generateCablePath(mouseX, mouseY, monitorCenterX, monitorBottomY);
-        mouseCable.setAttribute('d', mousePath);
+        mouseCable.setAttribute('d', generateCablePath(mouseX, mouseY, monitorCenterX + 20, monitorBottomY));
+    }
+
+    // Pad cable
+    if (sidePad3d && padCable) {
+        const padX = peripheralPositions.pad.x + sidePad3d.offsetWidth / 2;
+        const padY = peripheralPositions.pad.y + 10;
+        padCable.setAttribute('d', generateCablePath(padX, padY, monitorCenterX - 20, monitorBottomY));
     }
 }
 
 function generateCablePath(startX, startY, endX, endY) {
-    const midY = (startY + endY) / 2;
-    const controlOffset = Math.abs(startX - endX) * 0.3;
-    
-    return `M${startX},${startY} 
-            Q${startX},${midY + 30} ${(startX + endX) / 2},${midY + 50}
-            Q${endX},${midY + 30} ${endX},${endY}`;
+    const cp1y = startY - 50;
+    const cp2y = endY + 50;
+    return `M${startX},${startY} C${startX},${cp1y} ${endX},${cp2y} ${endX},${endY}`;
 }
 
-// Virtual Cursor on Screen
-let virtualCursorPos = { x: 0, y: 0 };
-let isMouseOverScreen = false;
+// Side Pad Skills Logic
+document.querySelectorAll('.pad-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        const skill = btn.dataset.skill;
+        const data = skillDetails[skill];
+        if (data && virtualBrowser) {
+            skillTitle.textContent = data.title;
+            skillDesc.innerHTML = data.desc;
+            browserUrl.textContent = data.url;
+            virtualBrowser.classList.remove('hide');
+            
+            // Play a small click sound or haptic if desired
+            btn.style.transform = 'scale(0.95)';
+            setTimeout(() => btn.style.transform = '', 100);
+        }
+    });
+});
 
-function updateVirtualCursor(e) {
-    if (!monitorScreen || !virtualCursor) return;
-    
-    const screenRect = monitorScreen.getBoundingClientRect();
-    const x = e.clientX - screenRect.left;
-    const y = e.clientY - screenRect.top;
-    
-    if (x >= 0 && x <= screenRect.width && y >= 0 && y <= screenRect.height) {
-        isMouseOverScreen = true;
-        virtualCursor.classList.add('active');
-        virtualCursor.style.left = (screenRect.left + x - setupContainer.getBoundingClientRect().left) + 'px';
-        virtualCursor.style.top = (screenRect.top + y - setupContainer.getBoundingClientRect().top) + 'px';
-    } else {
-        isMouseOverScreen = false;
-        virtualCursor.classList.remove('active');
-    }
+if (closeBrowser) {
+    closeBrowser.addEventListener('click', () => {
+        virtualBrowser.classList.add('hide');
+    });
 }
+
+// Monitor Screen Button Scrolling
+document.querySelectorAll('.os-cta-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        const targetId = btn.getAttribute('href').substring(1);
+        const target = document.getElementById(targetId);
+        if (target) {
+            target.scrollIntoView({ behavior: 'smooth' });
+        }
+    });
+});
 
 // Event Listeners for Desktop Setup
 if (keyboard3d) {
     keyboard3d.addEventListener('mousedown', (e) => startDrag(e, keyboard3d, 'keyboard'));
     keyboard3d.addEventListener('touchstart', (e) => startDrag(e, keyboard3d, 'keyboard'), { passive: false });
 }
-
 if (mouse3d) {
     mouse3d.addEventListener('mousedown', (e) => startDrag(e, mouse3d, 'mouse'));
     mouse3d.addEventListener('touchstart', (e) => startDrag(e, mouse3d, 'mouse'), { passive: false });
 }
+if (sidePad3d) {
+    sidePad3d.addEventListener('mousedown', (e) => startDrag(e, sidePad3d, 'pad'));
+    sidePad3d.addEventListener('touchstart', (e) => startDrag(e, sidePad3d, 'pad'), { passive: false });
+}
 
 document.addEventListener('mousemove', (e) => {
     onDrag(e);
-    updateVirtualCursor(e);
+    // Virtual cursor logic
+    if (monitorScreen && virtualCursor) {
+        const rect = monitorScreen.getBoundingClientRect();
+        const isIn = e.clientX >= rect.left && e.clientX <= rect.right && 
+                     e.clientY >= rect.top && e.clientY <= rect.bottom;
+        
+        if (isIn) {
+            virtualCursor.style.opacity = '1';
+            const setupRect = setupContainer.getBoundingClientRect();
+            virtualCursor.style.left = (e.clientX - setupRect.left) + 'px';
+            virtualCursor.style.top = (e.clientY - setupRect.top) + 'px';
+        } else {
+            virtualCursor.style.opacity = '0';
+        }
+    }
 });
+
 document.addEventListener('touchmove', (e) => onDrag(e), { passive: false });
 document.addEventListener('mouseup', endDrag);
 document.addEventListener('touchend', endDrag);
 
-// Mouse button clicks on 3D mouse
-const mouseLeftBtn = document.querySelector('.mouse-left-btn');
-const mouseRightBtn = document.querySelector('.mouse-right-btn');
-
-if (mouseLeftBtn) {
-    mouseLeftBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        // Simulate click on screen buttons
-        if (isMouseOverScreen) {
-            const screenBtns = monitorScreen.querySelectorAll('.monitor-btn');
-            screenBtns.forEach(btn => {
-                const rect = btn.getBoundingClientRect();
-                const cursorRect = virtualCursor.getBoundingClientRect();
-                if (cursorRect.left >= rect.left && cursorRect.left <= rect.right &&
-                    cursorRect.top >= rect.top && cursorRect.top <= rect.bottom) {
-                    btn.click();
-                }
-            });
-        }
-    });
-}
-
-// Key press effects
-document.querySelectorAll('.tech-key').forEach(key => {
-    key.addEventListener('click', (e) => {
-        e.stopPropagation();
-        key.style.transform = 'translateZ(2px) translateY(4px)';
-        setTimeout(() => {
-            key.style.transform = '';
-        }, 150);
-    });
-});
-
-// Initialize on load
+// Initial Load
 window.addEventListener('load', () => {
-    setTimeout(initSetupPositions, 100);
+    initSetupPositions();
+    // Trigger typing effect from original script if needed
 });
 
-window.addEventListener('resize', () => {
-    initSetupPositions();
-});
+window.addEventListener('resize', initSetupPositions);
