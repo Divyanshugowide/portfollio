@@ -184,73 +184,116 @@ body {
     position: relative;
     width: 100%;
     height: 100vh;
-    min-height: 800px;
+    min-height: 900px;
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     justify-content: center;
     overflow: hidden;
-    background: radial-gradient(ellipse at 50% 30%, #0a1628 0%, #020617 50%, #000 100%);
+    background: linear-gradient(180deg, #020617 0%, #0a0f1a 40%, #1a1510 100%);
+    perspective: 1200px;
 }
 
 .desk-surface {
     position: relative;
     width: 100%;
-    max-width: 1600px;
+    max-width: 1800px;
     height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-end;
-    padding-bottom: 40px;
 }
 
+/* Wooden desk slab */
 .desk-surface::before {
     content: '';
     position: absolute;
     bottom: 0;
-    left: 0;
-    right: 0;
-    height: 280px;
-    background: linear-gradient(180deg, 
-        #2d1f14 0%, 
-        #3d2a1c 20%,
-        #4a3525 40%,
-        #3d2a1c 60%,
-        #2d1f14 100%);
-    transform: perspective(1000px) rotateX(60deg);
+    left: 50%;
+    transform: translateX(-50%) perspective(1200px) rotateX(70deg);
     transform-origin: bottom center;
+    width: 1400px;
+    height: 450px;
+    background: 
+        repeating-linear-gradient(
+            90deg,
+            #3d2a1c 0px,
+            #4a3525 2px,
+            #5c4230 4px,
+            #4a3525 6px,
+            #3d2a1c 8px
+        ),
+        linear-gradient(180deg, 
+            #2d1f14 0%, 
+            #3d2a1c 15%,
+            #5c4230 30%,
+            #4a3525 50%,
+            #3d2a1c 70%,
+            #2d1f14 100%);
+    border-radius: 15px 15px 0 0;
     box-shadow: 
-        inset 0 20px 60px rgba(0, 0, 0, 0.6),
-        inset 0 -10px 40px rgba(0, 0, 0, 0.4),
-        0 -20px 60px rgba(0, 0, 0, 0.8);
+        inset 0 30px 80px rgba(0, 0, 0, 0.5),
+        inset 0 -20px 60px rgba(0, 0, 0, 0.4),
+        0 -30px 80px rgba(0, 0, 0, 0.9),
+        0 10px 40px rgba(0, 0, 0, 0.8);
 }
 
+/* Desk mat / mousepad area */
 .desk-surface::after {
     content: '';
     position: absolute;
     bottom: 0;
     left: 50%;
-    transform: translateX(-50%);
-    width: 800px;
-    height: 400px;
+    transform: translateX(-50%) perspective(1200px) rotateX(70deg);
+    transform-origin: bottom center;
+    width: 1100px;
+    height: 350px;
     background: linear-gradient(180deg, 
         rgba(15, 23, 42, 0.95) 0%, 
-        rgba(10, 15, 30, 0.9) 100%);
-    border-radius: 10px 10px 0 0;
-    transform: perspective(1000px) rotateX(60deg) translateX(-50%);
-    transform-origin: bottom center;
+        rgba(10, 15, 30, 0.98) 50%,
+        rgba(5, 10, 20, 1) 100%);
+    border-radius: 12px;
     box-shadow: 
-        0 0 50px rgba(0, 0, 0, 0.8),
-        inset 0 0 80px rgba(56, 189, 248, 0.02);
+        inset 0 0 100px rgba(0, 0, 0, 0.6),
+        inset 0 0 30px rgba(56, 189, 248, 0.02),
+        0 5px 20px rgba(0, 0, 0, 0.5);
+    z-index: 1;
 }
 
 /* MONITOR - Curved Ultrawide Style */
 .monitor {
     position: absolute;
-    top: 60px;
+    top: 80px;
     left: 50%;
     transform: translateX(-50%);
     z-index: 10;
+}
+
+/* Monitor Cable - visible element */
+.monitor-cable {
+    position: absolute;
+    bottom: -180px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 8px;
+    height: 140px;
+    background: linear-gradient(90deg, #1a1a2e 0%, #2d2d4a 50%, #1a1a2e 100%);
+    border-radius: 4px;
+    box-shadow: 2px 3px 10px rgba(0,0,0,0.6);
+    z-index: 5;
+}
+
+.monitor-cable::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 25px;
+    height: 12px;
+    background: #1a1a2e;
+    border-radius: 3px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.5);
 }
 
 .monitor-body {
@@ -350,20 +393,6 @@ body {
     box-shadow: 
         0 10px 30px rgba(0, 0, 0, 0.8),
         0 0 0 2px rgba(255, 255, 255, 0.03);
-}
-
-/* Monitor Cable */
-.monitor::after {
-    content: '';
-    position: absolute;
-    bottom: -180px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 6px;
-    height: 120px;
-    background: linear-gradient(180deg, #1a1a2e 0%, #0d0d1a 100%);
-    border-radius: 3px;
-    box-shadow: 2px 0 5px rgba(0,0,0,0.5);
 }
 
 /* SCREEN UI */
@@ -750,17 +779,18 @@ body {
     transform: translateY(-2px);
 }
 
-/* STREAM DECK - 2x3 Layout (matching reference) */
+/* STREAM DECK / SKILL PAD - Laying flat on desk */
 .stream-deck {
     position: absolute;
-    left: 80px;
-    bottom: 100px;
-    z-index: 20;
-    transform: perspective(800px) rotateY(20deg) rotateX(-8deg);
+    left: 8%;
+    bottom: 35px;
+    z-index: 25;
+    transform: perspective(800px) rotateX(55deg) rotateZ(-5deg);
+    transform-origin: center bottom;
 }
 
 .deck-body {
-    width: 150px;
+    width: 160px;
     background: linear-gradient(180deg, #1a1a2e 0%, #0d0d1a 100%);
     border-radius: 18px;
     padding: 18px 15px;
@@ -768,11 +798,27 @@ body {
     flex-direction: column;
     gap: 12px;
     box-shadow: 
-        -20px 30px 60px rgba(0, 0, 0, 0.85),
+        0 20px 50px rgba(0, 0, 0, 0.9),
+        0 5px 20px rgba(0, 0, 0, 0.7),
         0 0 0 3px rgba(56, 189, 248, 0.08),
         inset 0 2px 0 rgba(255, 255, 255, 0.08),
         inset 0 -2px 10px rgba(0, 0, 0, 0.5);
     position: relative;
+}
+
+/* Stream deck cable */
+.deck-body::before {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 6px;
+    height: 80px;
+    background: linear-gradient(90deg, #1a1a2e 0%, #2d2d4a 50%, #1a1a2e 100%);
+    border-radius: 3px;
+    box-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+    z-index: -1;
 }
 
 .deck-body::after {
@@ -855,13 +901,14 @@ body {
     text-transform: uppercase;
 }
 
-/* KEYBOARD - Realistic Mechanical */
+/* KEYBOARD - Realistic Mechanical laying flat */
 .keyboard {
     position: absolute;
-    bottom: 60px;
+    bottom: 25px;
     left: 50%;
-    transform: translateX(-50%) perspective(1000px) rotateX(15deg);
-    z-index: 20;
+    transform: translateX(-50%) perspective(1000px) rotateX(55deg);
+    transform-origin: center bottom;
+    z-index: 25;
 }
 
 .keyboard-base {
@@ -869,10 +916,25 @@ body {
     padding: 15px;
     border-radius: 12px;
     box-shadow: 
-        0 30px 60px rgba(0, 0, 0, 0.8),
-        0 10px 30px rgba(0, 0, 0, 0.6),
+        0 25px 60px rgba(0, 0, 0, 0.9),
+        0 8px 25px rgba(0, 0, 0, 0.7),
         0 0 0 2px rgba(255, 255, 255, 0.03),
         inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    position: relative;
+}
+
+/* Keyboard cable */
+.keyboard-base::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 100%;
+    transform: translateY(-50%);
+    width: 100px;
+    height: 6px;
+    background: linear-gradient(180deg, #2d2d4a 0%, #1a1a2e 50%, #0d0d1a 100%);
+    border-radius: 3px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.5);
 }
 
 .keyboard-plate {
@@ -971,26 +1033,44 @@ body {
     filter: blur(10px);
 }
 
-/* MOUSE - Realistic Gaming Mouse */
+/* MOUSE - Realistic Gaming Mouse laying flat */
 .mouse {
     position: absolute;
-    right: 120px;
-    bottom: 100px;
-    z-index: 20;
-    transform: perspective(500px) rotateY(-15deg) rotateX(5deg);
+    right: 12%;
+    bottom: 50px;
+    z-index: 25;
+    transform: perspective(600px) rotateX(50deg) rotateZ(5deg);
+    transform-origin: center bottom;
 }
 
 .mouse-body {
-    width: 65px;
-    height: 110px;
+    width: 70px;
+    height: 115px;
     background: linear-gradient(135deg, #2d3e5a 0%, #1a2744 30%, #0f172a 70%, #0a1020 100%);
     border-radius: 30px 30px 40px 40px;
     position: relative;
     box-shadow: 
-        -10px 20px 40px rgba(0, 0, 0, 0.7),
+        0 15px 40px rgba(0, 0, 0, 0.9),
+        0 5px 15px rgba(0, 0, 0, 0.7),
         0 0 0 1px rgba(255, 255, 255, 0.05),
         inset 0 2px 4px rgba(255, 255, 255, 0.1),
         inset -5px -5px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Mouse cable */
+.mouse-body::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 5px;
+    height: 120px;
+    background: linear-gradient(90deg, #1a1a2e 0%, #2d2d4a 50%, #1a1a2e 100%);
+    border-radius: 3px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+    transform-origin: top center;
+    z-index: -1;
 }
 
 .mouse-body::before {
@@ -1454,8 +1534,8 @@ body {
 /* RESPONSIVE */
 @media (max-width: 1200px) {
     .monitor-body { width: 750px; height: 420px; }
-    .stream-deck { left: 50px; }
-    .mouse { right: 80px; }
+    .stream-deck { left: 5%; }
+    .mouse { right: 8%; }
 }
 
 @media (max-width: 1024px) {
@@ -1465,8 +1545,11 @@ body {
     
     .monitor-body { width: 600px; height: 350px; }
     .stream-deck { display: none; }
-    .mouse { right: 50px; bottom: 80px; }
-    .keyboard { transform: translateX(-50%) perspective(1000px) rotateX(15deg) scale(0.85); }
+    .mouse { right: 5%; bottom: 40px; }
+    .keyboard { 
+        transform: translateX(-50%) perspective(1000px) rotateX(50deg) scale(0.85); 
+        bottom: 20px;
+    }
 }
 
 @media (max-width: 768px) {
@@ -1488,7 +1571,11 @@ body {
     .cta-buttons { flex-wrap: wrap; }
     .cta-btn { padding: 8px 16px; font-size: 12px; }
     
-    .keyboard { transform: translateX(-50%) perspective(1000px) rotateX(10deg) scale(0.65); }
+    .keyboard { 
+        transform: translateX(-50%) perspective(1000px) rotateX(45deg) scale(0.65); 
+        bottom: 15px;
+    }
+    .keyboard-base::before { display: none; }
     .mouse { display: none; }
     
     .panel { padding: 40px 20px; margin-bottom: 40px; }
@@ -1501,7 +1588,10 @@ body {
     .profile-info { text-align: center; }
     .contact-row { justify-content: center; flex-wrap: wrap; font-size: 11px; }
     .cta-buttons { justify-content: center; }
-    .keyboard { transform: translateX(-50%) perspective(1000px) rotateX(10deg) scale(0.5); }
+    .keyboard { 
+        transform: translateX(-50%) perspective(1000px) rotateX(40deg) scale(0.5); 
+        bottom: 10px;
+    }
 }
 
 ::selection { background: var(--accent-1); color: var(--bg-1); }
