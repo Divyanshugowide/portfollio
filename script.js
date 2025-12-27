@@ -344,15 +344,12 @@ function openSkillBrowser(skillKey) {
     const skill = skillsData[skillKey];
     if (!skill) return;
 
-    const screenDefault = document.getElementById('screen-default');
+    const screenContent = document.getElementById('screen-content');
     const screenBrowser = document.getElementById('screen-browser');
-    const browserUrl = document.getElementById('browser-url');
     const browserContent = document.getElementById('browser-content');
 
-    screenDefault.classList.add('hidden');
-    screenBrowser.classList.add('active');
-    
-    browserUrl.textContent = `https://skills.divyanshu.dev/${skillKey}`;
+    screenContent.classList.add('hide');
+    screenBrowser.classList.remove('hide');
     
     let modelsSection = '';
     if (skill.models && skill.models.length > 0) {
@@ -415,11 +412,11 @@ function openSkillBrowser(skillKey) {
 }
 
 function closeSkillBrowser() {
-    const screenDefault = document.getElementById('screen-default');
+    const screenContent = document.getElementById('screen-content');
     const screenBrowser = document.getElementById('screen-browser');
     
-    screenBrowser.classList.remove('active');
-    screenDefault.classList.remove('hidden');
+    screenBrowser.classList.add('hide');
+    screenContent.classList.remove('hide');
 }
 
 document.getElementById('browser-close')?.addEventListener('click', closeSkillBrowser);
