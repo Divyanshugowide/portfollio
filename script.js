@@ -130,6 +130,7 @@ document.querySelectorAll('.spotlight-card').forEach(card => {
 // Typing Effect
 const phrases = [
     'AI Engineer',
+    'Computer Vision',
     'LLM Specialist',
     'RAG Architect',
     'Full Stack Dev'
@@ -241,6 +242,11 @@ if (contactForm) {
 
 // Modal Logic (Reused)
 const projectData = {
+    garuda: { 
+        title: 'Garuda AI — Neural Surveillance', 
+        tags: ['AI', 'Computer Vision', 'Surveillance', 'Gemini 3 Pro'], 
+        body: 'Garuda AI is an autonomous neural surveillance platform engineered for real-time threat detection, defence-grade monitoring, and precision analytics. From identifying human intrusion and hostile movements to alerting early fire ignition or drone activity, Garuda delivers superhuman situational awareness, 24/7. Built for industry, critical infrastructure, defence, and border security, it transforms ordinary cameras into intelligent vision systems—capable of understanding intent, predicting behavior, and capturing forensic-level evidence. Powered by Google Gemini 3 Pro AI.' 
+    },
     nrrc: { title: 'NRRC AI', tags: ['RAG', 'Embeddings'], body: 'Full-stack AI retrieval system.' },
     crystal: { title: 'Crystal AI', tags: ['LLM', 'FastAPI'], body: 'Personal assistant with memory.' },
     face: { title: 'Emotion Detection', tags: ['CV', 'TensorFlow'], body: 'Real-time emotion classification.' },
