@@ -161,11 +161,169 @@ document.querySelectorAll('.deck-btn').forEach(btn => {
         btn.style.transform = 'translateZ(-5px)';
         setTimeout(() => btn.style.transform = '', 100);
         
-        // Show skill name in monitor maybe? (Optional)
-        const skill = btn.getAttribute('title');
-        console.log(`Activated skill: ${skill}`);
+        const skill = btn.getAttribute('data-skill');
+        if (skill) {
+            openSkillBrowser(skill);
+        }
     });
 });
+
+const skillsData = {
+    pytorch: {
+        name: 'PyTorch',
+        icon: 'devicon-pytorch-plain',
+        subtitle: 'Deep Learning Framework',
+        description: 'PyTorch is my go-to framework for building neural networks and deep learning models. I use it extensively for computer vision tasks, NLP models, and custom AI architectures. Its dynamic computation graph makes experimentation fast and intuitive.',
+        experience: '3+',
+        projects: '8',
+        proficiency: '90%',
+        relatedProjects: [
+            'Face Emotion Detection - CNN model training',
+            'Garuda AI - Neural surveillance system',
+            'Custom embedding models for RAG'
+        ]
+    },
+    nlp: {
+        name: 'NLP',
+        icon: 'fa-solid fa-language',
+        subtitle: 'Natural Language Processing',
+        description: 'Natural Language Processing is at the core of my AI work. I specialize in building LLM applications, text embeddings, semantic search, and conversational AI systems. From tokenization to transformer architectures, I handle the full NLP pipeline.',
+        experience: '2+',
+        projects: '6',
+        proficiency: '85%',
+        relatedProjects: [
+            'Arabic Article Finder - Multi-language retrieval',
+            'Crystal AI - Contextual reasoning engine',
+            'Product Search AI - Semantic search system'
+        ]
+    },
+    docker: {
+        name: 'Docker',
+        icon: 'devicon-docker-plain',
+        subtitle: 'Containerization & DevOps',
+        description: 'Docker is essential for my production deployments. I containerize AI microservices, manage multi-container applications with Docker Compose, and ensure consistent environments from development to production. All my FastAPI backends are Docker-ready.',
+        experience: '2+',
+        projects: '10',
+        proficiency: '88%',
+        relatedProjects: [
+            'Crystal AI - Dockerized deployment',
+            'RAG microservices architecture',
+            'FastAPI inference backends'
+        ]
+    },
+    tensorflow: {
+        name: 'TensorFlow',
+        icon: 'devicon-tensorflow-original',
+        subtitle: 'ML Framework & Production',
+        description: 'TensorFlow powers many of my production ML models. I use it for training CNNs, deploying models with TensorFlow Serving, and building end-to-end ML pipelines. Its ecosystem including TensorBoard and TF Lite enables comprehensive model management.',
+        experience: '3+',
+        projects: '5',
+        proficiency: '82%',
+        relatedProjects: [
+            'Face Emotion Detection - CNN classifier',
+            'Real-time object detection systems',
+            'Model optimization for edge deployment'
+        ]
+    },
+    network: {
+        name: 'Network Architecture',
+        icon: 'fa-solid fa-network-wired',
+        subtitle: 'System Design & APIs',
+        description: 'I design and implement robust network architectures for AI systems. This includes building RESTful APIs, WebSocket connections for real-time features, microservices communication patterns, and optimizing latency for production AI inference.',
+        experience: '2+',
+        projects: '7',
+        proficiency: '80%',
+        relatedProjects: [
+            'Multi-service RAG architecture',
+            'Real-time surveillance API',
+            'Distributed embedding pipelines'
+        ]
+    },
+    python: {
+        name: 'Python',
+        icon: 'devicon-python-plain',
+        subtitle: 'Primary Development Language',
+        description: 'Python is my primary language for AI/ML development. I write clean, efficient, and well-documented code. From data processing with Pandas to building FastAPI backends, Python enables me to move quickly from prototype to production.',
+        experience: '4+',
+        projects: '15+',
+        proficiency: '95%',
+        relatedProjects: [
+            'All AI/ML projects',
+            'FastAPI microservices',
+            'Data analysis & visualization'
+        ]
+    }
+};
+
+function openSkillBrowser(skillKey) {
+    const skill = skillsData[skillKey];
+    if (!skill) return;
+
+    const screenDefault = document.getElementById('screen-default');
+    const screenBrowser = document.getElementById('screen-browser');
+    const browserUrl = document.getElementById('browser-url');
+    const browserContent = document.getElementById('browser-content');
+
+    screenDefault.classList.add('hidden');
+    screenBrowser.classList.add('active');
+    
+    browserUrl.textContent = `https://skills.divyanshu.dev/${skillKey}`;
+    
+    browserContent.innerHTML = `
+        <div class="skill-page">
+            <div class="skill-header">
+                <div class="skill-icon-large">
+                    <i class="${skill.icon}"></i>
+                </div>
+                <div class="skill-title-section">
+                    <h2>${skill.name}</h2>
+                    <span class="skill-subtitle">${skill.subtitle}</span>
+                </div>
+            </div>
+            
+            <div class="skill-description">
+                <p>${skill.description}</p>
+            </div>
+            
+            <div class="skill-stats">
+                <div class="stat-item">
+                    <span class="stat-value">${skill.experience}</span>
+                    <span class="stat-label">Years Exp</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value">${skill.projects}</span>
+                    <span class="stat-label">Projects</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value">${skill.proficiency}</span>
+                    <span class="stat-label">Proficiency</span>
+                </div>
+            </div>
+            
+            <div class="skill-projects">
+                <h3><i class="fa-solid fa-folder-open"></i> Related Projects</h3>
+                <div class="project-list">
+                    ${skill.relatedProjects.map(p => `
+                        <div class="project-item">
+                            <i class="fa-solid fa-chevron-right"></i>
+                            <span>${p}</span>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+function closeSkillBrowser() {
+    const screenDefault = document.getElementById('screen-default');
+    const screenBrowser = document.getElementById('screen-browser');
+    
+    screenBrowser.classList.remove('active');
+    screenDefault.classList.remove('hidden');
+}
+
+document.getElementById('browser-close')?.addEventListener('click', closeSkillBrowser);
 
 window.addEventListener('scroll', () => {
     const winScroll = document.body.scrollTop || document.documentElement.scrollTop;

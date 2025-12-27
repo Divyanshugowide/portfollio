@@ -43,7 +43,7 @@
                 <div class="monitor">
                     <div class="monitor-body">
                         <div class="monitor-screen">
-                            <div class="screen-ui">
+                            <div class="screen-ui" id="screen-default">
                                 <div class="screen-header">
                                     <span class="screen-name">Divyanshu Purohit</span>
                                     <a href="DivyanshuResume.pdf" class="screen-resume-btn" download>Download Resume (PDF)</a>
@@ -72,6 +72,21 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="screen-browser" id="screen-browser">
+                                <div class="browser-toolbar">
+                                    <div class="browser-buttons">
+                                        <span class="browser-btn close" id="browser-close"></span>
+                                        <span class="browser-btn minimize"></span>
+                                        <span class="browser-btn maximize"></span>
+                                    </div>
+                                    <div class="browser-url-bar">
+                                        <i class="fa-solid fa-lock"></i>
+                                        <span id="browser-url">https://skills.divyanshu.dev/</span>
+                                    </div>
+                                </div>
+                                <div class="browser-content" id="browser-content">
+                                </div>
+                            </div>
                             <div class="scanlines"></div>
                         </div>
                         <div class="monitor-bezel-bottom">
@@ -88,31 +103,31 @@
                 <div class="stream-deck">
                     <div class="deck-body">
                         <div class="deck-row">
-                            <div class="deck-btn" title="PyTorch">
+                            <div class="deck-btn" data-skill="pytorch" title="PyTorch">
                                 <i class="devicon-pytorch-plain"></i>
                                 <span>PYTORCH</span>
                             </div>
-                            <div class="deck-btn" title="NLP">
+                            <div class="deck-btn" data-skill="nlp" title="NLP">
                                 <i class="fa-solid fa-language"></i>
                                 <span>NLP</span>
                             </div>
                         </div>
                         <div class="deck-row">
-                            <div class="deck-btn" title="Docker">
+                            <div class="deck-btn" data-skill="docker" title="Docker">
                                 <i class="devicon-docker-plain"></i>
                                 <span>DOCKER</span>
                             </div>
-                            <div class="deck-btn" title="TensorFlow">
+                            <div class="deck-btn" data-skill="tensorflow" title="TensorFlow">
                                 <i class="devicon-tensorflow-original"></i>
                                 <span>TENSORFLOW</span>
                             </div>
                         </div>
                         <div class="deck-row">
-                            <div class="deck-btn" title="Network">
+                            <div class="deck-btn" data-skill="network" title="Network">
                                 <i class="fa-solid fa-network-wired"></i>
                                 <span>NETWORK</span>
                             </div>
-                            <div class="deck-btn" title="Python">
+                            <div class="deck-btn" data-skill="python" title="Python">
                                 <i class="devicon-python-plain"></i>
                                 <span>PYTHON</span>
                             </div>
