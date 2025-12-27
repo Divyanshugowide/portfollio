@@ -468,3 +468,34 @@ document.querySelectorAll('.panel, .exp, .project-card').forEach(el => {
     el.classList.add('reveal');
     observer.observe(el);
 });
+
+// Mobile Menu Toggle
+const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+const navLinks = document.getElementById('navLinks');
+const navActions = document.querySelector('.nav-actions');
+
+if (mobileMenuToggle) {
+    mobileMenuToggle.addEventListener('click', () => {
+        mobileMenuToggle.classList.toggle('active');
+        navLinks.classList.toggle('show');
+        navActions.classList.toggle('show');
+    });
+
+    // Close menu when clicking a link
+    navLinks.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            mobileMenuToggle.classList.remove('active');
+            navLinks.classList.remove('show');
+            navActions.classList.remove('show');
+        });
+    });
+}
+
+// Close menu on resize to desktop
+window.addEventListener('resize', () => {
+    if (window.innerWidth > 767) {
+        mobileMenuToggle?.classList.remove('active');
+        navLinks?.classList.remove('show');
+        navActions?.classList.remove('show');
+    }
+});
