@@ -17,321 +17,127 @@
     <div id="custom-cursor">
         <div class="cursor-dot"></div>
         <div class="cursor-ring"></div>
-        <div class="cursor-glitch"></div>
     </div>
     <div id="scroll-progress"></div>
-    <canvas id="neural-bg" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;pointer-events:none;"></canvas>
-    <div class="noise-overlay"></div>
+    <canvas id="neural-bg"></canvas>
+
     <main class="stage">
         <header class="nav" role="banner">
             <div class="brand">Divyanshu Purohit</div>
             <div class="nav-actions">
                 <a class="btn resume-btn" href="DivyanshuResume.pdf" download>Download Resume (PDF)</a>
-                <button class="menu-toggle" aria-label="Toggle navigation">☰</button>
             </div>
             <nav class="links" role="navigation">
-                <a href="#about" class="mono-link"><span style="opacity:0.5;margin-right:4px;">01.</span> About</a>
-                <a href="#experience" class="mono-link"><span style="opacity:0.5;margin-right:4px;">02.</span>
-                    Experience</a>
-                <a href="#projects" class="mono-link"><span style="opacity:0.5;margin-right:4px;">03.</span>
-                    Projects</a>
-                <a href="#skills" class="mono-link"><span style="opacity:0.5;margin-right:4px;">04.</span> Skills</a>
-                <a href="#contact" class="mono-link"><span style="opacity:0.5;margin-right:4px;">05.</span> Contact</a>
+                <a href="#about" class="mono-link"><span class="nav-num">01.</span> About</a>
+                <a href="#experience" class="mono-link"><span class="nav-num">02.</span> Experience</a>
+                <a href="#projects" class="mono-link"><span class="nav-num">03.</span> Projects</a>
+                <a href="#skills" class="mono-link"><span class="nav-num">04.</span> Skills</a>
+                <a href="#contact" class="mono-link"><span class="nav-num">05.</span> Contact</a>
             </nav>
         </header>
 
-        <!-- 3D Desktop Setup -->
-        <section class="desktop-setup" aria-label="Desktop Setup">
-            <div class="setup-container" id="scene">
-                <!-- 3D Monitor -->
-                <div class="monitor-3d" id="monitor3d">
-                    <div class="monitor-frame">
-                        <div class="monitor-body">
-                            <div class="face front">
-                                <div class="monitor-bezel">
-                                    <div class="monitor-screen" id="monitorScreen">
-                                          <!-- Monitor OS / UI -->
-                                          <div class="monitor-os">
-                                              <header class="os-header">
-                                                  <div class="os-user">Divyanshu Purohit</div>
-                                                  <a href="DivyanshuResume.pdf" class="os-btn resume-os-btn" download>Download Resume (PDF)</a>
-                                                  <nav class="os-links">
-                                                      <a href="#about"><span class="os-num">01.</span> About</a>
-                                                      <a href="#experience"><span class="os-num">02.</span> Experience</a>
-                                                      <a href="#projects"><span class="os-num">03.</span> Projects</a>
-                                                      <a href="#skills"><span class="os-num">04.</span> Skills</a>
-                                                      <a href="#contact"><span class="os-num">05.</span> Contact</a>
-                                                  </nav>
-                                              </header>
-                                              
-                                              <div class="os-content">
-                                                  <div class="os-hero">
-                                                      <div class="os-profile">
-                                                          <img src="assets/WhatsApp Image 2025-11-30 at 4.49.31 PM.jpeg" alt="Profile" id="profileImg" loading="lazy">
-                                                      </div>
-                                                      <div class="os-info">
-                                                          <p class="os-lede">Architecting scalable <span class="highlight">AI systems</span>, production-ready <span class="highlight">LLM workflows</span>, and high-performance <span class="highlight">retrieval architectures</span>.</p>
-                                                          <div class="os-contact-info font-mono">
-                                                              <span class="os-phone">7037730830</span>
-                                                              <a href="mailto:divyanshu.25bkbiet@gmail.com" class="os-email">divyanshu.25bkbiet@gmail.com</a>
-                                                          </div>
-                                                          <div class="os-cta">
-                                                              <a href="#projects" class="os-cta-btn primary">See Projects</a>
-                                                              <a href="#contact" class="os-cta-btn secondary">Contact Me</a>
-                                                          </div>
-                                                      </div>
-                                                  </div>
-                                              </div>
-      
-                                              <!-- Virtual Browser Window (Hidden by default) -->
-                                              <div class="virtual-browser hide" id="virtualBrowser">
-                                                  <div class="browser-bar">
-                                                      <div class="browser-dots">
-                                                          <span></span><span></span><span></span>
-                                                      </div>
-                                                      <div class="browser-url" id="browserUrl">https://portfolio.ai/skills/docker</div>
-                                                      <button class="browser-close" id="closeBrowser">✕</button>
-                                                  </div>
-                                                  <div class="browser-frame">
-                                                      <div class="browser-content" id="browserContent">
-                                                          <h2 id="skillTitle">Docker</h2>
-                                                          <div id="skillDesc">
-                                                              <p>Containerization and deployment workflows for production AI systems.</p>
-                                                              <ul class="skill-list">
-                                                                  <li>Multi-stage builds</li>
-                                                                  <li>GPU-accelerated containers</li>
-                                                                  <li>Microservices orchestration</li>
-                                                              </ul>
-                                                          </div>
-                                                      </div>
-                                                  </div>
-                                              </div>
-                                          </div>
-      
-                                        <div class="screen-scanlines"></div>
-                                        <div class="screen-glow"></div>
+        <!-- 3D Desktop Setup Section -->
+        <section class="desktop-scene">
+            <div class="desk-surface">
+                <!-- Monitor -->
+                <div class="monitor">
+                    <div class="monitor-body">
+                        <div class="monitor-screen">
+                            <div class="screen-ui">
+                                <div class="screen-header">
+                                    <span class="screen-name">Divyanshu Purohit</span>
+                                    <a href="DivyanshuResume.pdf" class="screen-resume-btn" download>Download Resume (PDF)</a>
+                                    <nav class="screen-nav">
+                                        <a href="#about"><span class="sn">01.</span> About</a>
+                                        <a href="#experience"><span class="sn">02.</span> Experience</a>
+                                        <a href="#projects"><span class="sn">03.</span> Projects</a>
+                                        <a href="#skills"><span class="sn">04.</span> Skills</a>
+                                        <a href="#contact"><span class="sn">05.</span> Contact</a>
+                                    </nav>
+                                </div>
+                                <div class="screen-content">
+                                    <div class="profile-circle">
+                                        <img src="assets/WhatsApp Image 2025-11-30 at 4.49.31 PM.jpeg" alt="Profile">
                                     </div>
-                                    <div class="monitor-led"></div>
-                                    <div class="monitor-brand">DIVYANSHU</div>
+                                    <div class="profile-info">
+                                        <p class="tagline">Architecting scalable <span class="hl">AI systems</span>, production-ready <span class="hl">LLM workflows</span>, and high-performance <span class="hl">retrieval architectures</span>.</p>
+                                        <div class="contact-row">
+                                            <span class="phone">7037730830</span>
+                                            <a href="mailto:divyanshu.25bkbiet@gmail.com" class="email">divyanshu.25bkbiet@gmail.com</a>
+                                        </div>
+                                        <div class="cta-buttons">
+                                            <a href="#projects" class="cta-btn primary">See Projects</a>
+                                            <a href="#contact" class="cta-btn secondary">Contact Me</a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="face back"></div>
-                            <div class="face top"></div>
-                            <div class="face bottom"></div>
-                            <div class="face left"></div>
-                            <div class="face right"></div>
+                            <div class="scanlines"></div>
                         </div>
-                        <div class="monitor-stand">
-                            <div class="stand-neck">
-                                <div class="neck-body">
-                                    <div class="face front"></div>
-                                    <div class="face back"></div>
-                                    <div class="face top"></div>
-                                    <div class="face bottom"></div>
-                                    <div class="face left"></div>
-                                    <div class="face right"></div>
-                                </div>
-                            </div>
-                            <div class="stand-base">
-                                <div class="base-body">
-                                    <div class="face top"></div>
-                                    <div class="face bottom"></div>
-                                    <div class="face left"></div>
-                                    <div class="face right"></div>
-                                    <div class="face front"></div>
-                                    <div class="face back"></div>
-                                </div>
-                            </div>
+                        <div class="monitor-bezel-bottom">
+                            <span class="brand-label">DIVYANSHU</span>
                         </div>
                     </div>
-                    <div class="monitor-reflection"></div>
-                </div>
-
-                <!-- Cable Container -->
-                <svg class="cables-svg" id="cablesSvg">
-                    <defs>
-                        <linearGradient id="cableGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                            <stop offset="0%" style="stop-color:#1e293b;stop-opacity:1" />
-                            <stop offset="50%" style="stop-color:#334155;stop-opacity:1" />
-                            <stop offset="100%" style="stop-color:#1e293b;stop-opacity:1" />
-                        </linearGradient>
-                    </defs>
-                    <path id="keyboardCable" class="cable keyboard-cable" d="M0,0 Q0,0 0,0" stroke="url(#cableGradient)" stroke-width="6" fill="none"/>
-                    <path id="mouseCable" class="cable mouse-cable" d="M0,0 Q0,0 0,0" stroke="url(#cableGradient)" stroke-width="4" fill="none"/>
-                    <path id="padCable" class="cable pad-cable" d="M0,0 Q0,0 0,0" stroke="url(#cableGradient)" stroke-width="5" fill="none"/>
-                </svg>
-
-                <!-- 3D Side Pad (Stream Deck Style) -->
-                <div class="side-pad-3d" id="sidePad3d">
-                    <div class="pad-body-3d">
-                        <div class="face front">
-                            <div class="pad-grid">
-                                <div class="pad-btn" data-skill="pytorch">
-                                    <i class="devicon-pytorch-plain"></i>
-                                    <span>PYTORCH</span>
-                                </div>
-                                <div class="pad-btn" data-skill="nlp">
-                                    <i class="fa-solid fa-language"></i>
-                                    <span>NLP</span>
-                                </div>
-                                <div class="pad-btn" data-skill="docker">
-                                    <i class="devicon-docker-plain"></i>
-                                    <span>DOCKER</span>
-                                </div>
-                                <div class="pad-btn" data-skill="tensorflow">
-                                    <i class="devicon-tensorflow-line"></i>
-                                    <span>TENSORFLOW</span>
-                                </div>
-                                <div class="pad-btn" data-skill="network">
-                                    <i class="fa-solid fa-network-wired"></i>
-                                    <span>NETWORK</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="face back"></div>
-                        <div class="face top"></div>
-                        <div class="face bottom"></div>
-                        <div class="face left"></div>
-                        <div class="face right"></div>
+                    <div class="monitor-stand">
+                        <div class="stand-neck"></div>
+                        <div class="stand-base"></div>
                     </div>
-                    <div class="pad-shadow"></div>
                 </div>
 
-                <!-- 3D Keyboard -->
-                <div class="keyboard-3d" id="keyboard3d">
-                    <div class="keyboard-body-3d">
-                        <div class="face top">
-                            <div class="keyboard-plate">
-                                <div class="key-row">
-                                    <div class="tech-key" data-key="python">
-                                        <div class="key-cap">
-                                            <div class="face top"><i class="devicon-python-plain"></i><span>Python</span></div>
-                                            <div class="face side-f"></div>
-                                            <div class="face side-b"></div>
-                                            <div class="face side-l"></div>
-                                            <div class="face side-r"></div>
-                                        </div>
-                                    </div>
-                                    <div class="tech-key" data-key="llm">
-                                        <div class="key-cap">
-                                            <div class="face top"><i class="fa-solid fa-brain"></i><span>LLM</span></div>
-                                            <div class="face side-f"></div>
-                                            <div class="face side-b"></div>
-                                            <div class="face side-l"></div>
-                                            <div class="face side-r"></div>
-                                        </div>
-                                    </div>
-                                    <div class="tech-key" data-key="ai">
-                                        <div class="key-cap">
-                                            <div class="face top"><i class="fa-solid fa-microchip"></i><span>AI</span></div>
-                                            <div class="face side-f"></div>
-                                            <div class="face side-b"></div>
-                                            <div class="face side-l"></div>
-                                            <div class="face side-r"></div>
-                                        </div>
-                                    </div>
-                                    <div class="tech-key" data-key="cv">
-                                        <div class="key-cap">
-                                            <div class="face top"><i class="devicon-opencv-plain"></i><span>CV</span></div>
-                                            <div class="face side-f"></div>
-                                            <div class="face side-b"></div>
-                                            <div class="face side-l"></div>
-                                            <div class="face side-r"></div>
-                                        </div>
-                                    </div>
-                                    <div class="tech-key" data-key="docker">
-                                        <div class="key-cap">
-                                            <div class="face top"><i class="devicon-docker-plain"></i><span>Docker</span></div>
-                                            <div class="face side-f"></div>
-                                            <div class="face side-b"></div>
-                                            <div class="face side-l"></div>
-                                            <div class="face side-r"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="key-row">
-                                    <div class="tech-key" data-key="git">
-                                        <div class="key-cap">
-                                            <div class="face top"><i class="devicon-git-plain"></i><span>Git</span></div>
-                                            <div class="face side-f"></div>
-                                            <div class="face side-b"></div>
-                                            <div class="face side-l"></div>
-                                            <div class="face side-r"></div>
-                                        </div>
-                                    </div>
-                                    <div class="tech-key" data-key="tensorflow">
-                                        <div class="key-cap">
-                                            <div class="face top"><i class="devicon-tensorflow-line"></i><span>TF</span></div>
-                                            <div class="face side-f"></div>
-                                            <div class="face side-b"></div>
-                                            <div class="face side-l"></div>
-                                            <div class="face side-r"></div>
-                                        </div>
-                                    </div>
-                                    <div class="tech-key" data-key="pytorch">
-                                        <div class="key-cap">
-                                            <div class="face top"><i class="devicon-pytorch-plain"></i><span>PyTorch</span></div>
-                                            <div class="face side-f"></div>
-                                            <div class="face side-b"></div>
-                                            <div class="face side-l"></div>
-                                            <div class="face side-r"></div>
-                                        </div>
-                                    </div>
-                                    <div class="tech-key" data-key="nlp">
-                                        <div class="key-cap">
-                                            <div class="face top"><i class="fa-solid fa-language"></i><span>NLP</span></div>
-                                            <div class="face side-f"></div>
-                                            <div class="face side-b"></div>
-                                            <div class="face side-l"></div>
-                                            <div class="face side-r"></div>
-                                        </div>
-                                    </div>
-                                    <div class="tech-key" data-key="rag">
-                                        <div class="key-cap">
-                                            <div class="face top"><i class="fa-solid fa-network-wired"></i><span>RAG</span></div>
-                                            <div class="face side-f"></div>
-                                            <div class="face side-b"></div>
-                                            <div class="face side-l"></div>
-                                            <div class="face side-r"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                <!-- Stream Deck / Side Pad -->
+                <div class="stream-deck">
+                    <div class="deck-body">
+                        <div class="deck-btn" data-skill="pytorch">
+                            <i class="devicon-pytorch-plain"></i>
+                            <span>PYTORCH</span>
                         </div>
-                        <div class="face front"></div>
-                        <div class="face back"></div>
-                        <div class="face bottom"></div>
-                        <div class="face left"></div>
-                        <div class="face right"></div>
+                        <div class="deck-btn" data-skill="nlp">
+                            <i class="fa-solid fa-language"></i>
+                            <span>NLP</span>
+                        </div>
+                        <div class="deck-btn" data-skill="docker">
+                            <i class="devicon-docker-plain"></i>
+                            <span>DOCKER</span>
+                        </div>
+                        <div class="deck-btn" data-skill="tensorflow">
+                            <i class="devicon-tensorflow-original"></i>
+                            <span>TENSORFLOW</span>
+                        </div>
+                        <div class="deck-btn wide" data-skill="network">
+                            <i class="fa-solid fa-network-wired"></i>
+                            <span>NETWORK</span>
+                        </div>
                     </div>
-                    <div class="keyboard-shadow"></div>
                 </div>
 
-                <!-- 3D Mouse (Draggable) -->
-                <div class="mouse-3d" id="mouse3d">
+                <!-- Keyboard -->
+                <div class="keyboard">
+                    <div class="keyboard-body">
+                        <div class="key-row">
+                            <div class="key"><i class="devicon-python-plain"></i><span>PYTHON</span></div>
+                            <div class="key"><i class="fa-solid fa-brain"></i><span>LLM</span></div>
+                            <div class="key"><i class="fa-solid fa-microchip"></i><span>AI</span></div>
+                        </div>
+                        <div class="key-row">
+                            <div class="key"><i class="devicon-opencv-plain"></i><span>CV</span></div>
+                            <div class="key"><i class="devicon-docker-plain"></i><span>DOCKER</span></div>
+                        </div>
+                        <div class="key-row">
+                            <div class="key"><i class="devicon-git-plain"></i><span>GIT</span></div>
+                            <div class="key"><i class="devicon-tensorflow-original"></i><span>TF</span></div>
+                            <div class="key"><i class="devicon-pytorch-plain"></i><span>PYTORCH</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mouse -->
+                <div class="mouse">
                     <div class="mouse-body">
-                        <div class="mouse-top">
-                            <div class="mouse-left-btn"></div>
-                            <div class="mouse-scroll"></div>
-                            <div class="mouse-right-btn"></div>
-                        </div>
+                        <div class="mouse-btn-left"></div>
+                        <div class="mouse-scroll"></div>
+                        <div class="mouse-btn-right"></div>
                         <div class="mouse-led"></div>
-                        <div class="mouse-cable-port"></div>
                     </div>
-                    <div class="mouse-shadow"></div>
-                    <div class="mouse-glow"></div>
-                </div>
-
-                <!-- Virtual Cursor on Screen -->
-                <div class="virtual-cursor" id="virtualCursor">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                        <path d="M5 3L19 12L12 13L9 20L5 3Z" fill="#fff" stroke="#000" stroke-width="1"/>
-                    </svg>
-                </div>
-
-                <!-- Drag Instructions -->
-                <div class="setup-instructions">
-                    <span><i class="fa-solid fa-hand-pointer"></i> Drag to rearrange</span>
                 </div>
             </div>
         </section>
@@ -359,19 +165,16 @@
                     <div class="exp-header">
                         <img src="assets/gowide-logo.png" alt="Gowide Solutions Logo" class="company-logo">
                         <div class="exp-title-wrapper">
-                            <h3>AI Engineer — Gowide Solutions <span class="exp-dates font-mono">Oct 2025 –
-                                    Present</span></h3>
+                            <h3>AI Engineer — Gowide Solutions <span class="exp-dates font-mono">Oct 2025 – Present</span></h3>
                         </div>
                     </div>
-                    <p>Worked on multiple LLM-driven client projects, designing AI pipelines, embeddings workflows, and structured reasoning systems. Built microservices using FastAPI & Docker for indexing, search, inference.
-                    </p>
+                    <p>Worked on multiple LLM-driven client projects, designing AI pipelines, embeddings workflows, and structured reasoning systems. Built microservices using FastAPI & Docker for indexing, search, inference.</p>
                 </div>
                 <div class="exp spotlight-card">
                     <div class="exp-header">
                         <img src="assets/anantagni-logo.png" alt="Anantagni Industries Logo" class="company-logo">
                         <div class="exp-title-wrapper">
-                            <h3>AI Intern — Anantagani Industries <span class="exp-dates font-mono">Apr 2025 – Jul 2025</span>
-                            </h3>
+                            <h3>AI Intern — Anantagani Industries <span class="exp-dates font-mono">Apr 2025 – Jul 2025</span></h3>
                         </div>
                     </div>
                     <p>Led large-scale data labeling, developed CNN classifier, and integrated camera-based real-time detection using OpenCV.</p>
@@ -383,8 +186,7 @@
                             <h3>Data Analyst Intern — Tranity <span class="exp-dates font-mono">Apr 2024 – Aug 2024</span></h3>
                         </div>
                     </div>
-                    <p>Performed real-time analysis, cleaned large datasets, and developed Power BI dashboards for KPI tracking.
-                    </p>
+                    <p>Performed real-time analysis, cleaned large datasets, and developed Power BI dashboards for KPI tracking.</p>
                 </div>
             </div>
         </section>
@@ -394,7 +196,7 @@
             <div class="projects-grid">
                 <article class="project-card spotlight-card" data-project="garuda">
                     <a href="https://youtu.be/HLm1DpPTsPA?si=EOtui2AeSC_es-61" target="_blank" class="pc-media">
-                        <img src="https://img.youtube.com/vi/HLm1DpPTsPA/hqdefault.jpg" alt="Garuda AI Demo Thumbnail" style="width:100%;height:120px;object-fit:cover;border-radius:12px 12px 0 0;">
+                        <img src="https://img.youtube.com/vi/HLm1DpPTsPA/hqdefault.jpg" alt="Garuda AI Demo Thumbnail">
                     </a>
                     <div class="pc-body">
                         <h3>Garuda AI — Neural Surveillance</h3>
@@ -406,12 +208,11 @@
                 </article>
                 <article class="project-card spotlight-card" data-project="nrrc">
                     <a href="https://youtu.be/rlcIA71q2lc" target="_blank" class="pc-media">
-                        <img src="https://img.youtube.com/vi/rlcIA71q2lc/hqdefault.jpg" alt="NRRC AI Demo Thumbnail" style="width:100%;height:120px;object-fit:cover;border-radius:12px 12px 0 0;">
+                        <img src="https://img.youtube.com/vi/rlcIA71q2lc/hqdefault.jpg" alt="NRRC AI Demo Thumbnail">
                     </a>
                     <div class="pc-body">
                         <h3>Arabic Article Finder</h3>
-                        <p>Multi-stage reasoning engine for document parsing, embeddings, and retrieval with production microservices.
-                        </p>
+                        <p>Multi-stage reasoning engine for document parsing, embeddings, and retrieval with production microservices.</p>
                         <p class="tags font-mono"><span>RAG</span><span>Embeddings</span><span>FastAPI</span></p>
                         <a class="btn" href="https://youtu.be/rlcIA71q2lc" target="_blank">YouTube Demo</a>
                         <button class="ghost open-project">Details</button>
@@ -419,22 +220,19 @@
                 </article>
                 <article class="project-card spotlight-card" data-project="crystal">
                     <a href="https://youtu.be/iblLlpRmmQQ" target="_blank" class="pc-media">
-                        <img src="https://img.youtube.com/vi/iblLlpRmmQQ/hqdefault.jpg" alt="Crystal AI Demo Thumbnail" style="width:100%;height:120px;object-fit:cover;border-radius:12px 12px 0 0;">
+                        <img src="https://img.youtube.com/vi/iblLlpRmmQQ/hqdefault.jpg" alt="Crystal AI Demo Thumbnail">
                     </a>
                     <div class="pc-body">
                         <h3>Crystal AI — Personal AI Assistant</h3>
                         <p>Personal AI with long-term memory, contextual reasoning, and modular skills. FastAPI backend, RAG search, Dockerized for easy deployment.</p>
-                        <p class="tags font-mono">
-                            <span>LLM</span><span>RAG</span><span>FastAPI</span><span>Docker</span>
-                        </p>
+                        <p class="tags font-mono"><span>LLM</span><span>RAG</span><span>FastAPI</span><span>Docker</span></p>
                         <a class="btn" href="https://youtu.be/iblLlpRmmQQ" target="_blank">YouTube Demo</a>
                         <button class="ghost open-project">Details</button>
                     </div>
                 </article>
-                <!-- Prototype AI Chatbot project removed as requested -->
                 <article class="project-card" data-project="face">
                     <a href="https://github.com/Divyanshupurohit1/facedetectionsystem.git" target="_blank" class="pc-media">
-                        <img src="assets/images.jpg" alt="Face Emotion Detection Poster" style="width:100%;height:120px;object-fit:cover;border-radius:12px 12px 0 0;">
+                        <img src="assets/images.jpg" alt="Face Emotion Detection Poster">
                     </a>
                     <div class="pc-body">
                         <h3>Face Emotion Detection</h3>
@@ -446,7 +244,7 @@
                 </article>
                 <article class="project-card spotlight-card" data-project="finder">
                     <a href="https://youtu.be/8FG_ztCdxk4" target="_blank" class="pc-media">
-                        <img src="https://img.youtube.com/vi/8FG_ztCdxk4/hqdefault.jpg" alt="Article Finder AI Demo Thumbnail" style="width:100%;height:120px;object-fit:cover;border-radius:12px 12px 0 0;">
+                        <img src="https://img.youtube.com/vi/8FG_ztCdxk4/hqdefault.jpg" alt="Article Finder AI Demo Thumbnail">
                     </a>
                     <div class="pc-body">
                         <h3>Offline Article Finder</h3>
@@ -458,7 +256,7 @@
                 </article>
                 <article class="project-card spotlight-card" data-project="productsearch">
                     <a href="https://youtu.be/JgVi5H4PoPY" target="_blank" class="pc-media">
-                        <img src="https://img.youtube.com/vi/JgVi5H4PoPY/hqdefault.jpg" alt="Product Search AI Demo Thumbnail" style="width:100%;height:120px;object-fit:cover;border-radius:12px 12px 0 0;">
+                        <img src="https://img.youtube.com/vi/JgVi5H4PoPY/hqdefault.jpg" alt="Product Search AI Demo Thumbnail">
                     </a>
                     <div class="pc-body">
                         <h3>Product Search AI</h3>
@@ -470,7 +268,6 @@
             </div>
         </section>
 
-        <!-- Project detail modal -->
         <div id="projectModal" class="modal hide" role="dialog" aria-hidden="true">
             <div class="modal-backdrop"></div>
             <div class="modal-panel" role="document">
@@ -483,7 +280,6 @@
             </div>
         </div>
 
-        <div class="noise-overlay"></div>
         <section id="skills" class="panel">
             <h2><span class="sec-num font-mono">04.</span> Skills</h2>
             <div class="skills-wrapper">
@@ -539,10 +335,8 @@
                 </div>
                 <form class="contact-form" id="contactForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
                     <label><span>Name</span><input type="text" name="name" placeholder="Your name" required></label>
-                    <label><span>Email</span><input type="email" name="email" placeholder="you@example.com"
-                            required></label>
-                    <label><span>Message</span><textarea name="message" placeholder="Brief message"
-                            required></textarea></label>
+                    <label><span>Email</span><input type="email" name="email" placeholder="you@example.com" required></label>
+                    <label><span>Message</span><textarea name="message" placeholder="Brief message" required></textarea></label>
                     <div class="form-row">
                         <button type="submit" class="btn send-btn">
                             <span class="btn-text">Send Message</span>
