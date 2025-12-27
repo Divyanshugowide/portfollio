@@ -341,3 +341,235 @@ document.querySelectorAll('.modal-close, .modal-backdrop').forEach(el => {
         document.body.style.overflow = ''; // Unlock scroll
     });
 });
+
+// ===================================
+// 3D DESKTOP SETUP - Draggable Peripherals & Virtual Cursor
+// ===================================
+
+const setupContainer = document.querySelector('.setup-container');
+const keyboard3d = document.getElementById('keyboard3d');
+const mouse3d = document.getElementById('mouse3d');
+const monitorScreen = document.getElementById('monitorScreen');
+const virtualCursor = document.getElementById('virtualCursor');
+const cablesSvg = document.getElementById('cablesSvg');
+const keyboardCable = document.getElementById('keyboardCable');
+const mouseCable = document.getElementById('mouseCable');
+
+let isDragging = null;
+let dragOffset = { x: 0, y: 0 };
+let peripheralPositions = {
+    keyboard: { x: 0, y: 0 },
+    mouse: { x: 0, y: 0 }
+};
+
+// Initialize positions
+function initSetupPositions() {
+    if (!setupContainer || !keyboard3d || !mouse3d) return;
+    
+    const containerRect = setupContainer.getBoundingClientRect();
+    
+    // Set initial keyboard position (centered bottom)
+    peripheralPositions.keyboard = {
+        x: containerRect.width / 2 - keyboard3d.offsetWidth / 2,
+        y: containerRect.height - 220
+    };
+    
+    // Set initial mouse position (right side)
+    peripheralPositions.mouse = {
+        x: containerRect.width - 280,
+        y: containerRect.height - 180
+    };
+    
+    updatePeripheralPositions();
+    updateCables();
+}
+
+function updatePeripheralPositions() {
+    if (keyboard3d) {
+        keyboard3d.style.left = peripheralPositions.keyboard.x + 'px';
+        keyboard3d.style.top = peripheralPositions.keyboard.y + 'px';
+        keyboard3d.style.transform = 'translateZ(0)';
+    }
+    if (mouse3d) {
+        mouse3d.style.left = peripheralPositions.mouse.x + 'px';
+        mouse3d.style.top = peripheralPositions.mouse.y + 'px';
+    }
+}
+
+// Dragging Logic
+function startDrag(e, element, type) {
+    if (e.target.closest('.tech-key') || e.target.closest('.mouse-left-btn') || 
+        e.target.closest('.mouse-right-btn') || e.target.closest('.mouse-scroll')) {
+        return;
+    }
+    
+    e.preventDefault();
+    isDragging = { element, type };
+    element.classList.add('dragging');
+    
+    const rect = element.getBoundingClientRect();
+    const containerRect = setupContainer.getBoundingClientRect();
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+    
+    dragOffset = {
+        x: clientX - rect.left,
+        y: clientY - rect.top
+    };
+}
+
+function onDrag(e) {
+    if (!isDragging) return;
+    
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+    const containerRect = setupContainer.getBoundingClientRect();
+    
+    let newX = clientX - containerRect.left - dragOffset.x;
+    let newY = clientY - containerRect.top - dragOffset.y;
+    
+    // Constrain to container
+    const elementWidth = isDragging.element.offsetWidth;
+    const elementHeight = isDragging.element.offsetHeight;
+    
+    newX = Math.max(0, Math.min(newX, containerRect.width - elementWidth));
+    newY = Math.max(300, Math.min(newY, containerRect.height - elementHeight));
+    
+    peripheralPositions[isDragging.type] = { x: newX, y: newY };
+    
+    isDragging.element.style.left = newX + 'px';
+    isDragging.element.style.top = newY + 'px';
+    
+    updateCables();
+}
+
+function endDrag() {
+    if (isDragging) {
+        isDragging.element.classList.remove('dragging');
+        isDragging = null;
+    }
+}
+
+// Cable Drawing
+function updateCables() {
+    if (!cablesSvg || !keyboardCable || !mouseCable || !setupContainer) return;
+    
+    const containerRect = setupContainer.getBoundingClientRect();
+    cablesSvg.setAttribute('width', containerRect.width);
+    cablesSvg.setAttribute('height', containerRect.height);
+    
+    // Monitor connection point (center bottom of stand)
+    const monitorCenterX = containerRect.width / 2;
+    const monitorBottomY = 550;
+    
+    // Keyboard cable
+    if (keyboard3d) {
+        const kbRect = keyboard3d.getBoundingClientRect();
+        const kbX = peripheralPositions.keyboard.x + keyboard3d.offsetWidth;
+        const kbY = peripheralPositions.keyboard.y + keyboard3d.offsetHeight / 2;
+        
+        const kbPath = generateCablePath(kbX, kbY, monitorCenterX, monitorBottomY);
+        keyboardCable.setAttribute('d', kbPath);
+    }
+    
+    // Mouse cable
+    if (mouse3d) {
+        const mouseX = peripheralPositions.mouse.x + mouse3d.offsetWidth / 2;
+        const mouseY = peripheralPositions.mouse.y;
+        
+        const mousePath = generateCablePath(mouseX, mouseY, monitorCenterX, monitorBottomY);
+        mouseCable.setAttribute('d', mousePath);
+    }
+}
+
+function generateCablePath(startX, startY, endX, endY) {
+    const midY = (startY + endY) / 2;
+    const controlOffset = Math.abs(startX - endX) * 0.3;
+    
+    return `M${startX},${startY} 
+            Q${startX},${midY + 30} ${(startX + endX) / 2},${midY + 50}
+            Q${endX},${midY + 30} ${endX},${endY}`;
+}
+
+// Virtual Cursor on Screen
+let virtualCursorPos = { x: 0, y: 0 };
+let isMouseOverScreen = false;
+
+function updateVirtualCursor(e) {
+    if (!monitorScreen || !virtualCursor) return;
+    
+    const screenRect = monitorScreen.getBoundingClientRect();
+    const x = e.clientX - screenRect.left;
+    const y = e.clientY - screenRect.top;
+    
+    if (x >= 0 && x <= screenRect.width && y >= 0 && y <= screenRect.height) {
+        isMouseOverScreen = true;
+        virtualCursor.classList.add('active');
+        virtualCursor.style.left = (screenRect.left + x - setupContainer.getBoundingClientRect().left) + 'px';
+        virtualCursor.style.top = (screenRect.top + y - setupContainer.getBoundingClientRect().top) + 'px';
+    } else {
+        isMouseOverScreen = false;
+        virtualCursor.classList.remove('active');
+    }
+}
+
+// Event Listeners for Desktop Setup
+if (keyboard3d) {
+    keyboard3d.addEventListener('mousedown', (e) => startDrag(e, keyboard3d, 'keyboard'));
+    keyboard3d.addEventListener('touchstart', (e) => startDrag(e, keyboard3d, 'keyboard'), { passive: false });
+}
+
+if (mouse3d) {
+    mouse3d.addEventListener('mousedown', (e) => startDrag(e, mouse3d, 'mouse'));
+    mouse3d.addEventListener('touchstart', (e) => startDrag(e, mouse3d, 'mouse'), { passive: false });
+}
+
+document.addEventListener('mousemove', (e) => {
+    onDrag(e);
+    updateVirtualCursor(e);
+});
+document.addEventListener('touchmove', (e) => onDrag(e), { passive: false });
+document.addEventListener('mouseup', endDrag);
+document.addEventListener('touchend', endDrag);
+
+// Mouse button clicks on 3D mouse
+const mouseLeftBtn = document.querySelector('.mouse-left-btn');
+const mouseRightBtn = document.querySelector('.mouse-right-btn');
+
+if (mouseLeftBtn) {
+    mouseLeftBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        // Simulate click on screen buttons
+        if (isMouseOverScreen) {
+            const screenBtns = monitorScreen.querySelectorAll('.monitor-btn');
+            screenBtns.forEach(btn => {
+                const rect = btn.getBoundingClientRect();
+                const cursorRect = virtualCursor.getBoundingClientRect();
+                if (cursorRect.left >= rect.left && cursorRect.left <= rect.right &&
+                    cursorRect.top >= rect.top && cursorRect.top <= rect.bottom) {
+                    btn.click();
+                }
+            });
+        }
+    });
+}
+
+// Key press effects
+document.querySelectorAll('.tech-key').forEach(key => {
+    key.addEventListener('click', (e) => {
+        e.stopPropagation();
+        key.style.transform = 'translateZ(2px) translateY(4px)';
+        setTimeout(() => {
+            key.style.transform = '';
+        }, 150);
+    });
+});
+
+// Initialize on load
+window.addEventListener('load', () => {
+    setTimeout(initSetupPositions, 100);
+});
+
+window.addEventListener('resize', () => {
+    initSetupPositions();
+});

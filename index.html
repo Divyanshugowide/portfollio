@@ -40,51 +40,113 @@
             </nav>
         </header>
 
-        <section class="hero" aria-label="Hero">
-            <div id="scene">
-                <div class="card" id="card">
-                    <div class="card__bg"></div>
-                    <div class="card__content">
-                        <div class="profile">
-                            <img src="assets/WhatsApp Image 2025-11-30 at 4.49.31 PM.jpeg" alt="Profile" id="profileImg" loading="lazy" style="object-fit:cover;width:100%;height:100%;border-radius:50%;border:4px solid #fff;box-shadow:0 4px 24px rgba(0,0,0,0.18);background:#222;">
+        <!-- 3D Desktop Setup -->
+        <section class="desktop-setup" aria-label="Desktop Setup">
+            <div class="setup-container">
+                <!-- 3D Monitor -->
+                <div class="monitor-3d" id="monitor3d">
+                    <div class="monitor-frame">
+                        <div class="monitor-bezel">
+                            <div class="monitor-screen" id="monitorScreen">
+                                <div class="screen-content">
+                                    <div class="card" id="card">
+                                        <div class="card__bg"></div>
+                                        <div class="card__content">
+                                            <div class="profile">
+                                                <img src="assets/WhatsApp Image 2025-11-30 at 4.49.31 PM.jpeg" alt="Profile" id="profileImg" loading="lazy">
+                                            </div>
+                                            <div class="hero-info">
+                                                <h1 class="name">Divyanshu Purohit</h1>
+                                                <p class="role"><span id="typed-sub" class="font-mono">AI Engineer</span></p>
+                                                <p class="lede">Architecting scalable <span class="highlight">AI systems</span>, production-ready <span class="highlight">LLM workflows</span>, and high-performance <span class="highlight">retrieval architectures</span>.</p>
+                                                <div class="contact-inline font-mono">
+                                                    <span class="phone">7037730830</span>
+                                                    <a class="mail" href="mailto:divyanshu.25bkbiet@gmail.com">divyanshu.25bkbiet@gmail.com</a>
+                                                </div>
+                                                <div class="cta-row">
+                                                    <a class="btn monitor-btn" href="#projects" data-btn="projects">See Projects</a>
+                                                    <a class="ghost monitor-btn" href="#contact" data-btn="contact">Contact Me</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="screen-scanlines"></div>
+                                <div class="screen-glow"></div>
+                            </div>
+                            <div class="monitor-led"></div>
+                            <div class="monitor-brand">DIVYANSHU</div>
                         </div>
-                        <div class="hero-info">
-                            <h1 class="name">Divyanshu Purohit</h1>
-                            <p class="role"><span id="typed-sub" class="font-mono" style="color:var(--accent-1);">AI
-                                    Engineer</span></p>
-                            <p class="lede">Architecting scalable <span class="highlight" style="color:#fff;">AI
-                                    systems</span>, production-ready <span class="highlight" style="color:#fff;">LLM
-                                    workflows</span>, and high-performance <span class="highlight" style="color:#fff;">retrieval architectures</span>.</p>
-                            <div class="contact-inline font-mono">
-                                <span class="phone">7037730830</span>
-                                <a class="mail" href="mailto:divyanshu.25bkbiet@gmail.com">divyanshu.25bkbiet@gmail.com</a>
-                            </div>
-                            <div class="cta-row">
-                                <a class="btn" href="#projects">See Projects</a>
-                                <a class="ghost" href="#contact">Contact Me</a>
-                            </div>
+                        <div class="monitor-stand">
+                            <div class="stand-neck"></div>
+                            <div class="stand-base"></div>
                         </div>
                     </div>
+                    <div class="monitor-reflection"></div>
                 </div>
-            </div>
-        </section>
 
-        <!-- Tech Stack Keyboard -->
-        <section class="tech-keyboard-section">
-            <div class="tech-keyboard">
-                <div class="key-row">
-                    <div class="tech-key" data-key="python"><i class="devicon-python-plain"></i><span>Python</span></div>
-                    <div class="tech-key" data-key="llm"><i class="fa-solid fa-brain"></i><span>LLM</span></div>
-                    <div class="tech-key" data-key="ai"><i class="fa-solid fa-microchip"></i><span>AI</span></div>
-                    <div class="tech-key" data-key="cv"><i class="devicon-opencv-plain"></i><span>Computer Vision</span></div>
-                    <div class="tech-key" data-key="docker"><i class="devicon-docker-plain"></i><span>Docker</span></div>
+                <!-- Cable Container -->
+                <svg class="cables-svg" id="cablesSvg">
+                    <defs>
+                        <linearGradient id="cableGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" style="stop-color:#1e293b;stop-opacity:1" />
+                            <stop offset="50%" style="stop-color:#334155;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#1e293b;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <path id="keyboardCable" class="cable keyboard-cable" d="M0,0 Q0,0 0,0" stroke="url(#cableGradient)" stroke-width="6" fill="none"/>
+                    <path id="mouseCable" class="cable mouse-cable" d="M0,0 Q0,0 0,0" stroke="url(#cableGradient)" stroke-width="4" fill="none"/>
+                </svg>
+
+                <!-- 3D Keyboard -->
+                <div class="keyboard-3d" id="keyboard3d">
+                    <div class="keyboard-body">
+                        <div class="keyboard-plate">
+                            <div class="key-row">
+                                <div class="tech-key" data-key="python"><i class="devicon-python-plain"></i><span>Python</span></div>
+                                <div class="tech-key" data-key="llm"><i class="fa-solid fa-brain"></i><span>LLM</span></div>
+                                <div class="tech-key" data-key="ai"><i class="fa-solid fa-microchip"></i><span>AI</span></div>
+                                <div class="tech-key" data-key="cv"><i class="devicon-opencv-plain"></i><span>CV</span></div>
+                                <div class="tech-key" data-key="docker"><i class="devicon-docker-plain"></i><span>Docker</span></div>
+                            </div>
+                            <div class="key-row">
+                                <div class="tech-key" data-key="git"><i class="devicon-git-plain"></i><span>Git</span></div>
+                                <div class="tech-key" data-key="tensorflow"><i class="devicon-tensorflow-line"></i><span>TF</span></div>
+                                <div class="tech-key" data-key="pytorch"><i class="devicon-pytorch-plain"></i><span>PyTorch</span></div>
+                                <div class="tech-key" data-key="nlp"><i class="fa-solid fa-language"></i><span>NLP</span></div>
+                                <div class="tech-key" data-key="rag"><i class="fa-solid fa-network-wired"></i><span>RAG</span></div>
+                            </div>
+                        </div>
+                        <div class="keyboard-cable-port"></div>
+                    </div>
+                    <div class="keyboard-shadow"></div>
                 </div>
-                <div class="key-row">
-                    <div class="tech-key" data-key="git"><i class="devicon-git-plain"></i><span>Git</span></div>
-                    <div class="tech-key" data-key="tensorflow"><i class="devicon-tensorflow-line"></i><span>TensorFlow</span></div>
-                    <div class="tech-key" data-key="pytorch"><i class="devicon-pytorch-plain"></i><span>PyTorch</span></div>
-                    <div class="tech-key" data-key="nlp"><i class="fa-solid fa-language"></i><span>NLP</span></div>
-                    <div class="tech-key" data-key="rag"><i class="fa-solid fa-network-wired"></i><span>RAG</span></div>
+
+                <!-- 3D Mouse (Draggable) -->
+                <div class="mouse-3d" id="mouse3d">
+                    <div class="mouse-body">
+                        <div class="mouse-top">
+                            <div class="mouse-left-btn"></div>
+                            <div class="mouse-scroll"></div>
+                            <div class="mouse-right-btn"></div>
+                        </div>
+                        <div class="mouse-led"></div>
+                        <div class="mouse-cable-port"></div>
+                    </div>
+                    <div class="mouse-shadow"></div>
+                    <div class="mouse-glow"></div>
+                </div>
+
+                <!-- Virtual Cursor on Screen -->
+                <div class="virtual-cursor" id="virtualCursor">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M5 3L19 12L12 13L9 20L5 3Z" fill="#fff" stroke="#000" stroke-width="1"/>
+                    </svg>
+                </div>
+
+                <!-- Drag Instructions -->
+                <div class="setup-instructions">
+                    <span><i class="fa-solid fa-hand-pointer"></i> Drag to rearrange</span>
                 </div>
             </div>
         </section>
