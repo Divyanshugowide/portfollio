@@ -510,29 +510,29 @@ function updateCables() {
     cablesSvg.setAttribute('width', containerRect.width);
     cablesSvg.setAttribute('height', containerRect.height);
     
-    // Monitor connection point (stand area)
+    // Monitor connection point (stand neck area)
     const monitorCenterX = containerRect.width / 2;
-    const monitorBottomY = 520;
+    const monitorBottomY = 480; // Adjusted for new monitor height
     
     // Keyboard cable
     if (keyboard3d && keyboardCable) {
         const kbX = peripheralPositions.keyboard.x + keyboard3d.offsetWidth / 2;
-        const kbY = peripheralPositions.keyboard.y + 10;
+        const kbY = peripheralPositions.keyboard.y + 20;
         keyboardCable.setAttribute('d', generateCablePath(kbX, kbY, monitorCenterX, monitorBottomY));
     }
     
     // Mouse cable
     if (mouse3d && mouseCable) {
         const mouseX = peripheralPositions.mouse.x + 30;
-        const mouseY = peripheralPositions.mouse.y;
-        mouseCable.setAttribute('d', generateCablePath(mouseX, mouseY, monitorCenterX + 20, monitorBottomY));
+        const mouseY = peripheralPositions.mouse.y + 10;
+        mouseCable.setAttribute('d', generateCablePath(mouseX, mouseY, monitorCenterX + 40, monitorBottomY));
     }
 
     // Pad cable
     if (sidePad3d && padCable) {
         const padX = peripheralPositions.pad.x + sidePad3d.offsetWidth / 2;
-        const padY = peripheralPositions.pad.y + 10;
-        padCable.setAttribute('d', generateCablePath(padX, padY, monitorCenterX - 20, monitorBottomY));
+        const padY = peripheralPositions.pad.y + 20;
+        padCable.setAttribute('d', generateCablePath(padX, padY, monitorCenterX - 40, monitorBottomY));
     }
 }
 
