@@ -37,192 +37,107 @@
         </header>
 
         <!-- 3D Desktop Setup Section -->
-        <section class="desktop-scene">
-            <div class="desk-surface">
-                <!-- Monitor -->
-                <div class="monitor">
-                    <div class="monitor-body">
-                        <div class="monitor-screen">
-                            <div class="screen-ui" id="screen-default">
-                                <div class="screen-header">
-                                    <span class="screen-name">Divyanshu Purohit</span>
-                                    <a href="DivyanshuResume.pdf" class="screen-resume-btn" download>Download Resume (PDF)</a>
-                                    <nav class="screen-nav">
-                                        <a href="#about"><span class="sn">01.</span> About</a>
-                                        <a href="#experience"><span class="sn">02.</span> Experience</a>
-                                        <a href="#projects"><span class="sn">03.</span> Projects</a>
-                                        <a href="#skills"><span class="sn">04.</span> Skills</a>
-                                        <a href="#contact"><span class="sn">05.</span> Contact</a>
-                                    </nav>
-                                </div>
-                                <div class="screen-content">
-                                    <div class="profile-circle">
-                                        <img src="assets/WhatsApp Image 2025-11-30 at 4.49.31 PM.jpeg" alt="Profile">
-                                    </div>
-                                    <div class="profile-info">
-                                        <p class="tagline">Architecting scalable <span class="hl">AI systems</span>, production-ready <span class="hl">LLM workflows</span>, and high-performance <span class="hl">retrieval architectures</span>.</p>
-                                        <div class="contact-row">
-                                            <span class="phone">7037730830</span>
-                                            <a href="mailto:divyanshu.25bkbiet@gmail.com" class="email">divyanshu.25bkbiet@gmail.com</a>
-                                        </div>
-                                        <div class="cta-buttons">
-                                            <a href="#projects" class="cta-btn primary">See Projects</a>
-                                            <a href="#contact" class="cta-btn secondary">Contact Me</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="screen-browser" id="screen-browser">
-                                <div class="browser-toolbar">
-                                    <div class="browser-buttons">
-                                        <span class="browser-btn close" id="browser-close"></span>
-                                        <span class="browser-btn minimize"></span>
-                                        <span class="browser-btn maximize"></span>
-                                    </div>
-                                    <div class="browser-url-bar">
-                                        <i class="fa-solid fa-lock"></i>
-                                        <span id="browser-url">https://skills.divyanshu.dev/</span>
-                                    </div>
-                                </div>
-                                <div class="browser-content" id="browser-content">
-                                </div>
-                            </div>
-                            <div class="scanlines"></div>
-                        </div>
-                        <div class="monitor-bezel-bottom">
-                            <span class="brand-label">DIVYANSHU</span>
-                        </div>
+        <section class="desktop-scene" id="desktop-scene">
+            <canvas id="three-canvas"></canvas>
+            
+            <!-- HTML Overlay for Monitor Screen Content -->
+            <div class="monitor-overlay" id="monitor-overlay">
+                <div class="screen-ui" id="screen-default">
+                    <div class="screen-header">
+                        <span class="screen-name">Divyanshu Purohit</span>
+                        <a href="DivyanshuResume.pdf" class="screen-resume-btn" download>Download Resume (PDF)</a>
+                        <nav class="screen-nav">
+                            <a href="#about"><span class="sn">01.</span> About</a>
+                            <a href="#experience"><span class="sn">02.</span> Experience</a>
+                            <a href="#projects"><span class="sn">03.</span> Projects</a>
+                            <a href="#skills"><span class="sn">04.</span> Skills</a>
+                            <a href="#contact"><span class="sn">05.</span> Contact</a>
+                        </nav>
                     </div>
-                    <div class="monitor-stand">
-                        <div class="stand-neck"></div>
-                        <div class="stand-base"></div>
-                    </div>
-                    <div class="monitor-cable"></div>
-                </div>
-
-                <!-- Stream Deck / Skill Pad - 2x3 Layout -->
-                <div class="stream-deck">
-                    <div class="deck-body">
-                        <div class="deck-row">
-                            <div class="deck-btn" data-skill="pytorch" title="PyTorch">
-                                <i class="devicon-pytorch-plain"></i>
-                                <span>PYTORCH</span>
-                            </div>
-                            <div class="deck-btn" data-skill="nlp" title="NLP">
-                                <i class="fa-solid fa-language"></i>
-                                <span>NLP</span>
-                            </div>
+                    <div class="screen-content">
+                        <div class="profile-circle">
+                            <img src="assets/WhatsApp Image 2025-11-30 at 4.49.31 PM.jpeg" alt="Profile">
                         </div>
-                        <div class="deck-row">
-                            <div class="deck-btn" data-skill="docker" title="Docker">
-                                <i class="devicon-docker-plain"></i>
-                                <span>DOCKER</span>
+                        <div class="profile-info">
+                            <p class="tagline">Architecting scalable <span class="hl">AI systems</span>, production-ready <span class="hl">LLM workflows</span>, and high-performance <span class="hl">retrieval architectures</span>.</p>
+                            <div class="contact-row">
+                                <span class="phone">7037730830</span>
+                                <a href="mailto:divyanshu.25bkbiet@gmail.com" class="email">divyanshu.25bkbiet@gmail.com</a>
                             </div>
-                            <div class="deck-btn" data-skill="tensorflow" title="TensorFlow">
-                                <i class="devicon-tensorflow-original"></i>
-                                <span>TENSORFLOW</span>
-                            </div>
-                        </div>
-                        <div class="deck-row">
-                            <div class="deck-btn" data-skill="network" title="Network">
-                                <i class="fa-solid fa-network-wired"></i>
-                                <span>NETWORK</span>
-                            </div>
-                            <div class="deck-btn" data-skill="python" title="Python">
-                                <i class="devicon-python-plain"></i>
-                                <span>PYTHON</span>
+                            <div class="cta-buttons">
+                                <a href="#projects" class="cta-btn primary">See Projects</a>
+                                <a href="#contact" class="cta-btn secondary">Contact Me</a>
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <!-- Realistic Mechanical Keyboard (60% Layout) -->
-                <div class="keyboard">
-                    <div class="keyboard-base">
-                        <div class="keyboard-plate">
-                            <div class="key-row">
-                                <div class="key small">Esc</div>
-                                <div class="key small">1</div>
-                                <div class="key small">2</div>
-                                <div class="key small">3</div>
-                                <div class="key small">4</div>
-                                <div class="key small">5</div>
-                                <div class="key small">6</div>
-                                <div class="key small">7</div>
-                                <div class="key small">8</div>
-                                <div class="key small">9</div>
-                                <div class="key small">0</div>
-                                <div class="key small">-</div>
-                                <div class="key small">+</div>
-                                <div class="key backspace">Bksp</div>
-                            </div>
-                            <div class="key-row">
-                                <div class="key tab">Tab</div>
-                                <div class="key">Q</div>
-                                <div class="key">W</div>
-                                <div class="key">E</div>
-                                <div class="key">R</div>
-                                <div class="key">T</div>
-                                <div class="key">Y</div>
-                                <div class="key">U</div>
-                                <div class="key">I</div>
-                                <div class="key">O</div>
-                                <div class="key">P</div>
-                                <div class="key">[</div>
-                                <div class="key">]</div>
-                                <div class="key pipe">\</div>
-                            </div>
-                            <div class="key-row">
-                                <div class="key caps">Caps</div>
-                                <div class="key">A</div>
-                                <div class="key">S</div>
-                                <div class="key">D</div>
-                                <div class="key">F</div>
-                                <div class="key">G</div>
-                                <div class="key">H</div>
-                                <div class="key">J</div>
-                                <div class="key">K</div>
-                                <div class="key">L</div>
-                                <div class="key">;</div>
-                                <div class="key">'</div>
-                                <div class="key enter">Enter</div>
-                            </div>
-                            <div class="key-row">
-                                <div class="key shift-l">Shift</div>
-                                <div class="key">Z</div>
-                                <div class="key">X</div>
-                                <div class="key">C</div>
-                                <div class="key">V</div>
-                                <div class="key">B</div>
-                                <div class="key">N</div>
-                                <div class="key">M</div>
-                                <div class="key">,</div>
-                                <div class="key">.</div>
-                                <div class="key">/</div>
-                                <div class="key shift-r">Shift</div>
-                            </div>
-                            <div class="key-row">
-                                <div class="key ctrl">Ctrl</div>
-                                <div class="key win">Win</div>
-                                <div class="key alt">Alt</div>
-                                <div class="key space"></div>
-                                <div class="key alt">Alt</div>
-                                <div class="key win">Win</div>
-                                <div class="key menu">Menu</div>
-                                <div class="key ctrl">Ctrl</div>
-                            </div>
+                <div class="screen-browser" id="screen-browser">
+                    <div class="browser-toolbar">
+                        <div class="browser-buttons">
+                            <span class="browser-btn close" id="browser-close"></span>
+                            <span class="browser-btn minimize"></span>
+                            <span class="browser-btn maximize"></span>
                         </div>
-                        <div class="keyboard-glow"></div>
+                        <div class="browser-url-bar">
+                            <i class="fa-solid fa-lock"></i>
+                            <span id="browser-url">https://skills.divyanshu.dev/</span>
+                        </div>
+                    </div>
+                    <div class="browser-content" id="browser-content">
                     </div>
                 </div>
+            </div>
 
-                <!-- Mouse -->
-                <div class="mouse">
-                    <div class="mouse-body">
-                        <div class="mouse-btn-left"></div>
-                        <div class="mouse-scroll"></div>
-                        <div class="mouse-btn-right"></div>
-                        <div class="mouse-led"></div>
+            <!-- Skill Pad Overlay -->
+            <div class="skill-pad-overlay" id="skill-pad-overlay">
+                <div class="skill-pad-grid">
+                    <div class="skill-btn" data-skill="python" title="Python">
+                        <i class="devicon-python-plain"></i>
+                        <span>PYTHON</span>
+                    </div>
+                    <div class="skill-btn" data-skill="nlp" title="NLP">
+                        <i class="fa-solid fa-language"></i>
+                        <span>NLP</span>
+                    </div>
+                    <div class="skill-btn" data-skill="docker" title="Docker">
+                        <i class="devicon-docker-plain"></i>
+                        <span>DOCKER</span>
+                    </div>
+                    <div class="skill-btn" data-skill="database" title="Database">
+                        <i class="fa-solid fa-database"></i>
+                        <span>DATABASE</span>
+                    </div>
+                    <div class="skill-btn" data-skill="faiss" title="FAISS">
+                        <i class="fa-solid fa-magnifying-glass-chart"></i>
+                        <span>FAISS</span>
+                    </div>
+                    <div class="skill-btn" data-skill="bm25" title="BM25">
+                        <i class="fa-solid fa-ranking-star"></i>
+                        <span>BM25</span>
+                    </div>
+                    <div class="skill-btn" data-skill="embeddings" title="Embeddings">
+                        <i class="fa-solid fa-vector-square"></i>
+                        <span>EMBEDDINGS</span>
+                    </div>
+                    <div class="skill-btn" data-skill="chunking" title="Chunking">
+                        <i class="fa-solid fa-cubes"></i>
+                        <span>CHUNKING</span>
+                    </div>
+                    <div class="skill-btn" data-skill="render" title="Render">
+                        <i class="fa-solid fa-cloud"></i>
+                        <span>RENDER</span>
+                    </div>
+                    <div class="skill-btn" data-skill="vercel" title="Vercel">
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+                        <span>VERCEL</span>
+                    </div>
+                    <div class="skill-btn" data-skill="llms" title="LLMs">
+                        <i class="fa-solid fa-brain"></i>
+                        <span>LLMS</span>
+                    </div>
+                    <div class="skill-btn" data-skill="pytorch" title="PyTorch">
+                        <i class="devicon-pytorch-plain"></i>
+                        <span>PYTORCH</span>
                     </div>
                 </div>
             </div>
@@ -380,6 +295,11 @@
                         <span class="skill-tag">OpenCV</span>
                         <span class="skill-tag">TensorFlow</span>
                         <span class="skill-tag">PostgreSQL</span>
+                        <span class="skill-tag">NLP</span>
+                        <span class="skill-tag">FAISS</span>
+                        <span class="skill-tag">BM25</span>
+                        <span class="skill-tag">Embeddings</span>
+                        <span class="skill-tag">Chunking</span>
                     </div>
                 </div>
                 <div class="skill-category">
@@ -391,6 +311,16 @@
                         <span class="skill-tag">DigitalOcean</span>
                         <span class="skill-tag">DockerHub</span>
                         <span class="skill-tag">Ngrok</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>LLM Experience</h3>
+                    <div class="skill-tags font-mono">
+                        <span class="skill-tag llm">Mistral 7B Instruct</span>
+                        <span class="skill-tag llm">Vicuna</span>
+                        <span class="skill-tag llm">Tulu-2</span>
+                        <span class="skill-tag llm">LLaMA 70B</span>
+                        <span class="skill-tag llm">LLaMA 8B</span>
                     </div>
                 </div>
             </div>
@@ -434,10 +364,19 @@
         </section>
 
         <footer class="footer">
-            <small>© Divyanshu Purohit — Built with HTML/CSS/JS</small>
+            <small>© Divyanshu Purohit — Built with HTML/CSS/JS & Three.js</small>
         </footer>
     </main>
 
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+            "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+        }
+    }
+    </script>
+    <script type="module" src="three-scene.js"></script>
     <script src="script.js"></script>
 </body>
 
