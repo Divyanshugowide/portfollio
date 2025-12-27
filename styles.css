@@ -1715,7 +1715,7 @@ body {
         padding: 12px 16px;
         flex-wrap: wrap;
     }
-    .brand { font-size: 16px; flex: 1; }
+    .brand { font-size: 16px; flex: 1; margin-bottom: 0; width: auto; text-align: left; }
     .nav-actions { 
         order: 2; 
         display: none;
@@ -1743,35 +1743,49 @@ body {
     .nav-num { display: none; }
     
     .desktop-scene { 
-        min-height: 600px; 
+        min-height: 550px; 
         padding: 20px 12px;
     }
-    .monitor-body { width: 420px; height: 260px; }
-    .monitor { top: 40px; }
-    .monitor-stand .stand-neck { height: 70px; width: 60px; }
-    .monitor-stand .stand-base { width: 200px; height: 15px; }
-    .monitor-cable { height: 100px; bottom: -140px; }
+    .monitor-body { width: 92vw; max-width: 420px; height: 250px; padding: 10px 10px 35px 10px; }
+    .monitor { top: 30px; }
+    .monitor-stand .stand-neck { height: 60px; width: 50px; }
+    .monitor-stand .stand-base { width: 160px; height: 14px; }
+    .monitor-stand { bottom: -110px; }
+    .monitor-cable { height: 80px; bottom: -120px; }
     
-    .screen-header { padding: 8px 12px; gap: 10px; }
-    .screen-name { font-size: 13px; }
-    .screen-resume-btn { padding: 6px 10px; font-size: 10px; }
+    .screen-header { padding: 8px 10px; gap: 8px; }
+    .screen-name { font-size: 12px; }
+    .screen-resume-btn { padding: 5px 10px; font-size: 9px; }
     .screen-nav { display: none; }
-    .profile-circle { width: 70px; height: 70px; }
-    .tagline { font-size: 12px; margin-bottom: 12px; }
-    .screen-content { gap: 20px; padding: 15px; }
-    .cta-buttons { flex-wrap: wrap; gap: 10px; }
-    .cta-btn { padding: 8px 16px; font-size: 12px; }
-    .contact-row { flex-wrap: wrap; font-size: 10px; gap: 10px; }
+    .profile-circle { width: 50px; height: 50px; border-width: 2px; }
+    .tagline { font-size: 10px; margin-bottom: 8px; line-height: 1.4; }
+    .hl { padding: 1px 4px; font-size: 10px; }
+    .screen-content { 
+        flex-direction: column; 
+        gap: 12px; 
+        padding: 10px;
+        align-items: center;
+    }
+    .profile-info { text-align: center; max-width: 100%; }
+    .cta-buttons { justify-content: center; flex-wrap: wrap; gap: 8px; }
+    .cta-btn { padding: 6px 14px; font-size: 10px; }
+    .contact-row { 
+        flex-direction: column;
+        justify-content: center; 
+        font-size: 9px; 
+        gap: 4px;
+        margin-bottom: 10px;
+    }
     
     .keyboard { 
-        transform: translateX(-50%) perspective(1000px) rotateX(45deg) scale(0.6); 
-        bottom: 12px;
+        transform: translateX(-50%) perspective(1000px) rotateX(45deg) scale(0.55); 
+        bottom: 10px;
     }
     .keyboard-base::before { display: none; }
     .mouse { display: none; }
     
-    .desk-surface::before { width: 600px; height: 250px; }
-    .desk-surface::after { width: 500px; height: 200px; }
+    .desk-surface::before { width: 95vw; max-width: 500px; height: 220px; }
+    .desk-surface::after { width: 85vw; max-width: 420px; height: 180px; }
     
     .panel { 
         padding: 32px 20px; 
@@ -1818,58 +1832,58 @@ body {
         padding: 10px 12px;
         border-radius: 16px;
     }
-    .brand { font-size: 14px; margin-bottom: 8px; }
+    .brand { font-size: 14px; }
     .resume-btn { font-size: 10px !important; padding: 6px 12px !important; }
     .links { gap: 4px; margin-top: 8px; }
-    .links a { font-size: 11px; padding: 5px 8px; }
+    .links a { font-size: 11px; padding: 8px 12px; }
     
     .desktop-scene { 
-        min-height: 520px; 
+        min-height: 480px; 
         padding: 16px 8px;
     }
-    .monitor-body { width: 320px; height: 200px; padding: 10px 10px 35px 10px; }
-    .monitor { top: 30px; }
-    .monitor-stand .stand-neck { height: 50px; width: 50px; }
-    .monitor-stand .stand-base { width: 150px; height: 12px; }
-    .monitor-stand { bottom: -95px; }
-    .monitor-cable { height: 70px; bottom: -100px; width: 6px; }
-    .monitor-bezel-bottom { height: 30px; }
-    .brand-label { font-size: 9px; letter-spacing: 4px; }
+    .monitor-body { width: 90vw; max-width: 340px; height: 200px; padding: 8px 8px 30px 8px; }
+    .monitor { top: 25px; }
+    .monitor-stand .stand-neck { height: 45px; width: 40px; }
+    .monitor-stand .stand-base { width: 130px; height: 10px; }
+    .monitor-stand { bottom: -85px; }
+    .monitor-cable { height: 60px; bottom: -90px; width: 5px; }
+    .monitor-bezel-bottom { height: 26px; }
+    .brand-label { font-size: 8px; letter-spacing: 3px; }
     
     .screen-header { 
-        padding: 6px 10px; 
-        gap: 8px;
-        flex-wrap: wrap;
+        padding: 5px 8px; 
+        gap: 6px;
+        flex-wrap: nowrap;
     }
-    .screen-name { font-size: 11px; }
-    .screen-resume-btn { padding: 4px 8px; font-size: 9px; }
-    .profile-circle { width: 55px; height: 55px; border-width: 2px; }
-    .tagline { font-size: 10px; line-height: 1.5; margin-bottom: 10px; }
-    .hl { padding: 2px 4px; font-size: 10px; }
+    .screen-name { font-size: 10px; }
+    .screen-resume-btn { padding: 4px 8px; font-size: 8px; }
+    .profile-circle { width: 40px; height: 40px; border-width: 2px; }
+    .tagline { font-size: 9px; line-height: 1.4; margin-bottom: 6px; }
+    .hl { padding: 1px 3px; font-size: 9px; }
     .screen-content { 
         flex-direction: column; 
-        gap: 12px; 
-        padding: 12px;
+        gap: 8px; 
+        padding: 8px;
         align-items: center;
     }
     .profile-info { text-align: center; max-width: 100%; }
-    .cta-buttons { justify-content: center; gap: 8px; }
-    .cta-btn { padding: 6px 12px; font-size: 10px; }
+    .cta-buttons { justify-content: center; gap: 6px; }
+    .cta-btn { padding: 5px 10px; font-size: 9px; }
     .contact-row { 
         justify-content: center; 
         flex-direction: column;
-        gap: 4px; 
-        font-size: 9px;
-        margin-bottom: 12px;
+        gap: 2px; 
+        font-size: 8px;
+        margin-bottom: 6px;
     }
     
     .keyboard { 
-        transform: translateX(-50%) perspective(1000px) rotateX(40deg) scale(0.42); 
-        bottom: 8px;
+        transform: translateX(-50%) perspective(1000px) rotateX(40deg) scale(0.4); 
+        bottom: 5px;
     }
     
-    .desk-surface::before { width: 450px; height: 200px; border-radius: 10px 10px 0 0; }
-    .desk-surface::after { width: 380px; height: 160px; border-radius: 8px; }
+    .desk-surface::before { width: 95vw; max-width: 400px; height: 180px; border-radius: 10px 10px 0 0; }
+    .desk-surface::after { width: 85vw; max-width: 350px; height: 150px; border-radius: 8px; }
     
     .panel { 
         padding: 24px 16px; 
@@ -1950,30 +1964,36 @@ body {
     .nav { padding: 8px 10px; }
     .brand { font-size: 13px; }
     .resume-btn { font-size: 9px !important; padding: 5px 10px !important; }
-    .links a { font-size: 10px; padding: 4px 6px; }
+    .links a { font-size: 10px; padding: 6px 10px; }
     
-    .monitor-body { width: 280px; height: 175px; padding: 8px 8px 30px 8px; }
-    .monitor-stand .stand-neck { height: 40px; width: 40px; }
-    .monitor-stand .stand-base { width: 120px; height: 10px; }
-    .monitor-stand { bottom: -80px; }
-    .monitor-cable { height: 50px; bottom: -80px; }
-    .monitor-bezel-bottom { height: 25px; }
-    .brand-label { font-size: 8px; letter-spacing: 3px; }
+    .desktop-scene { min-height: 420px; }
+    .monitor-body { width: 92vw; max-width: 290px; height: 170px; padding: 6px 6px 24px 6px; }
+    .monitor { top: 20px; }
+    .monitor-stand .stand-neck { height: 35px; width: 35px; }
+    .monitor-stand .stand-base { width: 100px; height: 8px; }
+    .monitor-stand { bottom: -70px; }
+    .monitor-cable { height: 45px; bottom: -70px; width: 4px; }
+    .monitor-bezel-bottom { height: 20px; }
+    .brand-label { font-size: 6px; letter-spacing: 2px; }
     
-    .screen-header { padding: 5px 8px; }
-    .screen-name { font-size: 10px; }
-    .screen-resume-btn { padding: 3px 6px; font-size: 8px; }
-    .profile-circle { width: 45px; height: 45px; }
-    .tagline { font-size: 9px; }
-    .cta-btn { padding: 5px 10px; font-size: 9px; }
-    .contact-row { font-size: 8px; }
+    .screen-header { padding: 4px 6px; gap: 4px; }
+    .screen-name { font-size: 9px; }
+    .screen-resume-btn { padding: 3px 6px; font-size: 7px; }
+    .profile-circle { width: 32px; height: 32px; }
+    .tagline { font-size: 8px; line-height: 1.3; margin-bottom: 4px; }
+    .hl { padding: 1px 2px; font-size: 8px; }
+    .screen-content { gap: 6px; padding: 6px; }
+    .cta-btn { padding: 4px 8px; font-size: 8px; }
+    .cta-buttons { gap: 4px; }
+    .contact-row { font-size: 7px; gap: 1px; margin-bottom: 4px; }
     
     .keyboard { 
-        transform: translateX(-50%) perspective(1000px) rotateX(38deg) scale(0.35); 
+        transform: translateX(-50%) perspective(1000px) rotateX(38deg) scale(0.32); 
+        bottom: 2px;
     }
     
-    .desk-surface::before { width: 380px; height: 170px; }
-    .desk-surface::after { width: 320px; height: 140px; }
+    .desk-surface::before { width: 95vw; max-width: 340px; height: 150px; }
+    .desk-surface::after { width: 85vw; max-width: 300px; height: 120px; }
     
     .panel { padding: 20px 14px; margin: 0 6px 16px; }
     .panel h2 { font-size: 16px; }
