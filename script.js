@@ -135,9 +135,36 @@ function updateCursor() {
 }
 updateCursor();
 
-document.querySelectorAll('a, button, .key, .deck-btn, .project-card').forEach(el => {
-    el.addEventListener('mouseenter', () => cursor?.classList.add('hover'));
-    el.addEventListener('mouseleave', () => cursor?.classList.remove('hover'));
+// Key Interaction for Virtual Keyboard
+window.addEventListener('keydown', (e) => {
+    const key = e.key.toUpperCase();
+    const virtualKeys = document.querySelectorAll('.key');
+    virtualKeys.forEach(vk => {
+        if (vk.textContent.toUpperCase() === key || 
+            (key === 'BACKSPACE' && vk.classList.contains('backspace')) ||
+            (key === 'TAB' && vk.classList.contains('tab')) ||
+            (key === 'CAPSLOCK' && vk.classList.contains('caps')) ||
+            (key === 'ENTER' && vk.classList.contains('enter')) ||
+            (key === 'SHIFT' && (vk.classList.contains('shift-l') || vk.classList.contains('shift-r'))) ||
+            (key === 'CONTROL' && vk.classList.contains('ctrl')) ||
+            (key === 'ALT' && vk.classList.contains('alt')) ||
+            (key === ' ' && vk.classList.contains('space'))) {
+            vk.classList.add('pressed');
+            setTimeout(() => vk.classList.remove('pressed'), 150);
+        }
+    });
+});
+
+// Sound simulation or visual feedback for Stream Deck
+document.querySelectorAll('.deck-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        btn.style.transform = 'translateZ(-5px)';
+        setTimeout(() => btn.style.transform = '', 100);
+        
+        // Show skill name in monitor maybe? (Optional)
+        const skill = btn.getAttribute('title');
+        console.log(`Activated skill: ${skill}`);
+    });
 });
 
 window.addEventListener('scroll', () => {
