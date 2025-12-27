@@ -156,9 +156,9 @@ window.addEventListener('keydown', (e) => {
 });
 
 // Sound simulation or visual feedback for Stream Deck
-document.querySelectorAll('.skill-btn').forEach(btn => {
+document.querySelectorAll('.deck-btn').forEach(btn => {
     btn.addEventListener('click', () => {
-        btn.style.transform = 'translateY(1px) scale(0.98)';
+        btn.style.transform = 'translateZ(-5px)';
         setTimeout(() => btn.style.transform = '', 100);
         
         const skill = btn.getAttribute('data-skill');
@@ -197,6 +197,22 @@ const skillsData = {
             'Product Search AI - Semantic search system'
         ]
     },
+    llm: {
+        name: 'LLM Experience',
+        icon: 'fa-solid fa-brain',
+        subtitle: 'Large Language Models',
+        description: 'Extensive hands-on experience with various open-source and proprietary LLMs. I specialize in fine-tuning, prompt engineering, and deploying LLMs for production use cases including RAG systems, conversational AI, and reasoning tasks.',
+        experience: '2+',
+        projects: '8',
+        proficiency: '90%',
+        relatedProjects: [
+            'Mistral 7B Instruct - RAG & reasoning tasks',
+            'Vicuna - Conversational AI systems',
+            'Tulu-2 - Instruction following',
+            'LLaMA 70B - Complex reasoning pipelines',
+            'LLaMA 8B - Efficient inference deployments'
+        ]
+    },
     docker: {
         name: 'Docker',
         icon: 'devicon-docker-plain',
@@ -214,128 +230,99 @@ const skillsData = {
     database: {
         name: 'Database',
         icon: 'fa-solid fa-database',
-        subtitle: 'PostgreSQL, MongoDB, Vector DBs',
-        description: 'I work with various database systems including PostgreSQL for structured data, MongoDB for document storage, and vector databases like Pinecone and ChromaDB for embedding storage. I design efficient schemas for AI applications.',
+        subtitle: 'Data Storage & Management',
+        description: 'Proficient in designing and managing databases for AI applications. I work with PostgreSQL for structured data, vector databases for embeddings, and optimize queries for high-performance retrieval in production systems.',
         experience: '3+',
-        projects: '12',
+        projects: '10+',
         proficiency: '85%',
         relatedProjects: [
-            'Vector storage for RAG systems',
-            'Document indexing pipelines',
-            'Metadata management systems'
+            'PostgreSQL - Structured data storage',
+            'Vector databases for embedding storage',
+            'Database optimization for RAG systems'
+        ]
+    },
+    embeddings: {
+        name: 'Embeddings',
+        icon: 'fa-solid fa-vector-square',
+        subtitle: 'Vector Representations',
+        description: 'Expert in generating and utilizing text embeddings for semantic search, similarity matching, and RAG systems. I work with SentenceTransformers, OpenAI embeddings, and custom embedding models for domain-specific applications.',
+        experience: '2+',
+        projects: '7',
+        proficiency: '90%',
+        relatedProjects: [
+            'Arabic Article Finder - Multi-lingual embeddings',
+            'Product Search AI - Semantic embeddings',
+            'Custom embedding pipelines for RAG'
         ]
     },
     faiss: {
         name: 'FAISS',
         icon: 'fa-solid fa-magnifying-glass-chart',
         subtitle: 'Vector Similarity Search',
-        description: 'FAISS (Facebook AI Similarity Search) is my go-to library for efficient similarity search. I use it for building fast vector retrieval systems, implementing hybrid search with BM25, and optimizing embedding search at scale.',
+        description: 'FAISS (Facebook AI Similarity Search) is my go-to library for efficient similarity search and clustering of dense vectors. I use it to build scalable retrieval systems that handle millions of vectors with sub-millisecond query times.',
         experience: '2+',
         projects: '5',
-        proficiency: '82%',
+        proficiency: '88%',
         relatedProjects: [
             'Offline Article Finder - FAISS indexing',
-            'Arabic Article Finder - Hybrid retrieval',
-            'Product Search AI - Vector search'
+            'RAG retrieval optimization',
+            'Large-scale document search systems'
         ]
     },
     bm25: {
         name: 'BM25',
-        icon: 'fa-solid fa-ranking-star',
+        icon: 'fa-solid fa-filter',
         subtitle: 'Lexical Search Algorithm',
-        description: 'BM25 is a powerful lexical search algorithm I use for keyword-based retrieval. Combined with FAISS for semantic search, I build hybrid retrieval systems that leverage both exact matching and semantic understanding.',
+        description: 'BM25 is a powerful ranking function for keyword-based retrieval. I combine BM25 with dense retrieval (FAISS) to create hybrid search systems that leverage both lexical and semantic matching for superior recall and precision.',
         experience: '2+',
         projects: '4',
-        proficiency: '80%',
+        proficiency: '85%',
         relatedProjects: [
-            'Offline Article Finder - BM25 ranking',
-            'Hybrid search systems',
-            'Document retrieval pipelines'
-        ]
-    },
-    embeddings: {
-        name: 'Embeddings',
-        icon: 'fa-solid fa-vector-square',
-        subtitle: 'Text & Document Embeddings',
-        description: 'I specialize in generating and managing embeddings using SentenceTransformers, OpenAI, and custom models. I design embedding pipelines for RAG systems, handle dimensionality reduction, and optimize for retrieval quality.',
-        experience: '2+',
-        projects: '8',
-        proficiency: '88%',
-        relatedProjects: [
-            'Crystal AI - Custom embeddings',
-            'Arabic Article Finder - Multilingual embeddings',
-            'Product Search AI - E-commerce embeddings'
+            'Offline Article Finder - Hybrid retrieval',
+            'Arabic Article Finder - BM25 + embeddings',
+            'Document ranking systems'
         ]
     },
     chunking: {
         name: 'Chunking',
         icon: 'fa-solid fa-cubes',
-        subtitle: 'Document Chunking Strategies',
-        description: 'Effective chunking is crucial for RAG systems. I implement various strategies including semantic chunking, recursive splitting, and overlap management. I optimize chunk sizes for retrieval accuracy and LLM context windows.',
+        subtitle: 'Document Segmentation',
+        description: 'Chunking is critical for RAG systems. I implement various strategies including fixed-size, semantic, and recursive chunking to optimize document retrieval. Proper chunking ensures context preservation and improves LLM response quality.',
         experience: '2+',
         projects: '6',
-        proficiency: '85%',
+        proficiency: '87%',
         relatedProjects: [
-            'Arabic Article Finder - Smart chunking',
-            'Crystal AI - Context-aware splitting',
-            'Document processing pipelines'
+            'RAG pipeline optimization',
+            'PDF processing for AI systems',
+            'Context-aware document splitting'
         ]
     },
     render: {
         name: 'Render',
         icon: 'fa-solid fa-cloud',
         subtitle: 'Cloud Deployment Platform',
-        description: 'Render is my preferred platform for deploying AI services. I deploy FastAPI backends, Docker containers, and background workers. I handle auto-scaling, environment management, and continuous deployment from GitHub.',
-        experience: '2+',
-        projects: '8',
-        proficiency: '85%',
+        description: 'Render is my preferred platform for deploying AI backends and web services. I use it for hosting FastAPI applications, Docker containers, and background workers with easy scaling and automatic SSL.',
+        experience: '1+',
+        projects: '5',
+        proficiency: '82%',
         relatedProjects: [
-            'Crystal AI deployment',
-            'RAG service hosting',
-            'API endpoint management'
+            'Crystal AI - Backend deployment',
+            'FastAPI microservices hosting',
+            'AI inference endpoints'
         ]
     },
     vercel: {
         name: 'Vercel',
-        icon: 'fa-solid fa-bolt',
-        subtitle: 'Frontend & Serverless Deployment',
-        description: 'Vercel powers my frontend deployments and serverless functions. I use it for Next.js applications, static sites, and edge functions. Its seamless GitHub integration enables rapid iteration and preview deployments.',
-        experience: '2+',
-        projects: '5',
-        proficiency: '82%',
+        icon: 'fa-solid fa-triangle-exclamation',
+        subtitle: 'Frontend & Serverless Platform',
+        description: 'Vercel powers my frontend deployments and serverless functions. I use it for hosting React/Next.js applications, API routes, and edge functions with global CDN distribution and instant deployments.',
+        experience: '1+',
+        projects: '4',
+        proficiency: '80%',
         relatedProjects: [
-            'Portfolio website',
-            'AI demo frontends',
-            'Serverless API routes'
-        ]
-    },
-    llms: {
-        name: 'LLMs',
-        icon: 'fa-solid fa-brain',
-        subtitle: 'Large Language Models',
-        description: 'I have extensive experience with various LLMs including Mistral 7B Instruct, Vicuna, Tulu-2, LLaMA 70B, and LLaMA 8B. I fine-tune models, implement prompt engineering, and deploy local inference servers.',
-        experience: '2+',
-        projects: '10',
-        proficiency: '90%',
-        relatedProjects: [
-            'Crystal AI - Multi-model inference',
-            'Garuda AI - Gemini integration',
-            'Arabic Article Finder - LLM reasoning'
-        ],
-        models: ['Mistral 7B Instruct', 'Vicuna', 'Tulu-2', 'LLaMA 70B', 'LLaMA 8B']
-    },
-    pytorch: {
-        name: 'PyTorch',
-        icon: 'devicon-pytorch-plain',
-        subtitle: 'Deep Learning Framework',
-        description: 'PyTorch is my go-to framework for building neural networks and deep learning models. I use it extensively for computer vision tasks, NLP models, and custom AI architectures. Its dynamic computation graph makes experimentation fast and intuitive.',
-        experience: '3+',
-        projects: '8',
-        proficiency: '90%',
-        relatedProjects: [
-            'Face Emotion Detection - CNN model training',
-            'Garuda AI - Neural surveillance system',
-            'Custom embedding models for RAG'
+            'Portfolio website deployment',
+            'Frontend applications',
+            'Serverless API endpoints'
         ]
     }
 };
@@ -344,24 +331,15 @@ function openSkillBrowser(skillKey) {
     const skill = skillsData[skillKey];
     if (!skill) return;
 
-    const screenContent = document.getElementById('screen-content');
+    const screenDefault = document.getElementById('screen-default');
     const screenBrowser = document.getElementById('screen-browser');
+    const browserUrl = document.getElementById('browser-url');
     const browserContent = document.getElementById('browser-content');
 
-    screenContent.classList.add('hide');
-    screenBrowser.classList.remove('hide');
+    screenDefault.classList.add('hidden');
+    screenBrowser.classList.add('active');
     
-    let modelsSection = '';
-    if (skill.models && skill.models.length > 0) {
-        modelsSection = `
-            <div class="skill-models">
-                <h3><i class="fa-solid fa-microchip"></i> Models Experience</h3>
-                <div class="models-list">
-                    ${skill.models.map(m => `<span class="model-tag">${m}</span>`).join('')}
-                </div>
-            </div>
-        `;
-    }
+    browserUrl.textContent = `https://skills.divyanshu.dev/${skillKey}`;
     
     browserContent.innerHTML = `
         <div class="skill-page">
@@ -394,8 +372,6 @@ function openSkillBrowser(skillKey) {
                 </div>
             </div>
             
-            ${modelsSection}
-            
             <div class="skill-projects">
                 <h3><i class="fa-solid fa-folder-open"></i> Related Projects</h3>
                 <div class="project-list">
@@ -412,11 +388,11 @@ function openSkillBrowser(skillKey) {
 }
 
 function closeSkillBrowser() {
-    const screenContent = document.getElementById('screen-content');
+    const screenDefault = document.getElementById('screen-default');
     const screenBrowser = document.getElementById('screen-browser');
     
-    screenBrowser.classList.add('hide');
-    screenContent.classList.remove('hide');
+    screenBrowser.classList.remove('active');
+    screenDefault.classList.remove('hidden');
 }
 
 document.getElementById('browser-close')?.addEventListener('click', closeSkillBrowser);
