@@ -42,35 +42,65 @@
 
         <!-- 3D Desktop Setup -->
         <section class="desktop-setup" aria-label="Desktop Setup">
-            <div class="setup-container">
+            <div class="setup-container" id="scene">
                 <!-- 3D Monitor -->
                 <div class="monitor-3d" id="monitor3d">
                     <div class="monitor-frame">
                         <div class="monitor-bezel">
                             <div class="monitor-screen" id="monitorScreen">
-                                <div class="screen-content">
-                                    <div class="card" id="card">
-                                        <div class="card__bg"></div>
-                                        <div class="card__content">
-                                            <div class="profile">
+                                <!-- Monitor OS / UI -->
+                                <div class="monitor-os">
+                                    <header class="os-header">
+                                        <div class="os-user">Divyanshu Purohit</div>
+                                        <div class="os-nav">
+                                            <a href="DivyanshuResume.pdf" class="os-btn resume-os-btn" download>Download Resume (PDF)</a>
+                                            <nav class="os-links">
+                                                <a href="#about">01. About</a>
+                                                <a href="#experience">02. Experience</a>
+                                                <a href="#projects">03. Projects</a>
+                                                <a href="#skills">04. Skills</a>
+                                                <a href="#contact">05. Contact</a>
+                                            </nav>
+                                        </div>
+                                    </header>
+                                    
+                                    <div class="os-content">
+                                        <div class="os-hero">
+                                            <div class="os-profile">
                                                 <img src="assets/WhatsApp Image 2025-11-30 at 4.49.31 PM.jpeg" alt="Profile" id="profileImg" loading="lazy">
                                             </div>
-                                            <div class="hero-info">
-                                                <h1 class="name">Divyanshu Purohit</h1>
-                                                <p class="role"><span id="typed-sub" class="font-mono">AI Engineer</span></p>
-                                                <p class="lede">Architecting scalable <span class="highlight">AI systems</span>, production-ready <span class="highlight">LLM workflows</span>, and high-performance <span class="highlight">retrieval architectures</span>.</p>
-                                                <div class="contact-inline font-mono">
-                                                    <span class="phone">7037730830</span>
-                                                    <a class="mail" href="mailto:divyanshu.25bkbiet@gmail.com">divyanshu.25bkbiet@gmail.com</a>
+                                            <div class="os-info">
+                                                <p class="os-lede">Architecting scalable <span class="highlight">AI systems</span>, production-ready <span class="highlight">LLM workflows</span>, and high-performance <span class="highlight">retrieval architectures</span>.</p>
+                                                <div class="os-contact-info font-mono">
+                                                    <span>7037730830</span>
+                                                    <a href="mailto:divyanshu.25bkbiet@gmail.com">divyanshu.25bkbiet@gmail.com</a>
                                                 </div>
-                                                <div class="cta-row">
-                                                    <a class="btn monitor-btn" href="#projects" data-btn="projects">See Projects</a>
-                                                    <a class="ghost monitor-btn" href="#contact" data-btn="contact">Contact Me</a>
+                                                <div class="os-cta">
+                                                    <a href="#projects" class="os-cta-btn primary">See Projects</a>
+                                                    <a href="#contact" class="os-cta-btn secondary">Contact Me</a>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+
+                                    <!-- Virtual Browser Window (Hidden by default) -->
+                                    <div class="virtual-browser hide" id="virtualBrowser">
+                                        <div class="browser-bar">
+                                            <div class="browser-dots">
+                                                <span></span><span></span><span></span>
+                                            </div>
+                                            <div class="browser-url" id="browserUrl">https://portfolio.ai/skills/docker</div>
+                                            <button class="browser-close" id="closeBrowser">✕</button>
+                                        </div>
+                                        <div class="browser-frame">
+                                            <div class="browser-content" id="browserContent">
+                                                <h2 id="skillTitle">Docker</h2>
+                                                <p id="skillDesc">Containerization and deployment workflows...</p>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
+
                                 <div class="screen-scanlines"></div>
                                 <div class="screen-glow"></div>
                             </div>
@@ -96,7 +126,37 @@
                     </defs>
                     <path id="keyboardCable" class="cable keyboard-cable" d="M0,0 Q0,0 0,0" stroke="url(#cableGradient)" stroke-width="6" fill="none"/>
                     <path id="mouseCable" class="cable mouse-cable" d="M0,0 Q0,0 0,0" stroke="url(#cableGradient)" stroke-width="4" fill="none"/>
+                    <path id="padCable" class="cable pad-cable" d="M0,0 Q0,0 0,0" stroke="url(#cableGradient)" stroke-width="5" fill="none"/>
                 </svg>
+
+                <!-- 3D Side Pad (Stream Deck Style) -->
+                <div class="side-pad-3d" id="sidePad3d">
+                    <div class="pad-body">
+                        <div class="pad-grid">
+                            <div class="pad-btn" data-skill="pytorch">
+                                <i class="devicon-pytorch-plain"></i>
+                                <span>PyTorch</span>
+                            </div>
+                            <div class="pad-btn" data-skill="nlp">
+                                <i class="fa-solid fa-language"></i>
+                                <span>NLP</span>
+                            </div>
+                            <div class="pad-btn" data-skill="docker">
+                                <i class="devicon-docker-plain"></i>
+                                <span>Docker</span>
+                            </div>
+                            <div class="pad-btn" data-skill="tensorflow">
+                                <i class="devicon-tensorflow-line"></i>
+                                <span>TF</span>
+                            </div>
+                            <div class="pad-btn" data-skill="network">
+                                <i class="fa-solid fa-network-wired"></i>
+                                <span>Network</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pad-shadow"></div>
+                </div>
 
                 <!-- 3D Keyboard -->
                 <div class="keyboard-3d" id="keyboard3d">
